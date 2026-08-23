@@ -59,6 +59,18 @@ Build, from the same underlying scrambles:
 - **No-CoT variant**: assistant target = final answer only (ablation control
   for research question 2 — same questions/answers, only the intermediate
   supervision differs).
+- **PoT (Program of Thoughts) variant**: assistant target = a short Python
+  program against a fixed `Cube(top=..., ..., bottom=...)` /
+  `.rotate_to_top(side)` API (see `data_gen/pot_library.py`), ending in a
+  `print(...)` of the requested face. No natural-language reasoning at all —
+  the model only translates the story into API calls; an interpreter
+  (`data_gen/pot_executor.py`, sandboxed subprocess, 5s timeout) executes the
+  program and the printed output is graded, using the same
+  1.0/0.01/0.0 convention as reasoning-gym's own `score_answer`. Built from
+  the *same* seeds as the CoT/no-CoT splits, so all three are directly
+  comparable per-example. This is a fourth arm for research question 2: does
+  offloading computation to code (vs. NL scratchpad, vs. no scratchpad) shift
+  where each model size saturates?
 
 Splits (paired across CoT/no-CoT):
 - `train`: min=1, max=3 rotations, ~8k examples.

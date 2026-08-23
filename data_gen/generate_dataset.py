@@ -103,6 +103,17 @@ def build_example(seed: int, idx: int, min_rotations: int, max_rotations: int) -
     }
 
 
+# (split name, seed, size, min_rotations, max_rotations) -- shared with
+# generate_pot_dataset.py so CoT and PoT datasets cover the identical
+# underlying problems (same seeds), making the two directly comparable.
+SPLITS = [
+    ("train", 1000, 8000, 1, 3),
+    ("val", 2000, 1000, 1, 3),
+    ("test_seen", 3000, 1000, 1, 3),
+    ("test_extrapolate", 4000, 1000, 4, 6),
+]
+
+
 def write_split(path: Path, seed: int, size: int, min_rotations: int, max_rotations: int) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w") as f:
@@ -117,15 +128,7 @@ def main() -> None:
     parser.add_argument("--out-dir", type=Path, default=Path("../data"))
     args = parser.parse_args()
 
-    # (split name, seed, size, min_rotations, max_rotations)
-    splits = [
-        ("train", 1000, 8000, 1, 3),
-        ("val", 2000, 1000, 1, 3),
-        ("test_seen", 3000, 1000, 1, 3),
-        ("test_extrapolate", 4000, 1000, 4, 6),
-    ]
-
-    for name, seed, size, min_r, max_r in splits:
+    for name, seed, size, min_r, max_r in SPLITS:
         write_split(args.out_dir / f"{name}.jsonl", seed, size, min_r, max_r)
 
 
