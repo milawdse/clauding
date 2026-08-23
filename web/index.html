@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Choice Theory Personality Puzzles — V0</title>
+<title>پازل‌های شخصیت بر پایه نظریه انتخاب — نسخه صفر</title>
 <style>
   :root {
     --bg: #faf9f7;
@@ -19,7 +19,7 @@
     --bar-bg: #eee9e2;
     --bar-fill: #c9967a;
     --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --sans: 'Vazirmatn', 'IRANSans', Tahoma, 'Segoe UI', Arial, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -58,7 +58,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    line-height: 1.5;
+    line-height: 1.8;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
 
@@ -73,7 +73,7 @@
   nav.tabs button {
     font: inherit; font-size: 0.95rem; font-weight: 600;
     background: none; border: none; cursor: pointer;
-    padding: 10px 4px; margin-right: 18px;
+    padding: 10px 4px; margin-inline-end: 18px;
     color: var(--ink-faint);
     border-bottom: 2px solid transparent;
   }
@@ -133,15 +133,15 @@
   .bar-track { position: relative; height: 16px; background: var(--bar-bg); border-radius: 999px; overflow: hidden; }
   .bar-fill { position: absolute; top: 0; bottom: 0; left: 50%; background: var(--bar-fill); }
   .bar-mid { position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--ink-faint); }
-  .bar-val { font-size: 0.78rem; color: var(--ink-faint); text-align: right; font-family: var(--mono); }
-  .conf { font-size: 0.72rem; color: var(--ink-faint); margin-top: -6px; margin-bottom: 12px; margin-left: 130px; }
+  .bar-val { font-size: 0.78rem; color: var(--ink-faint); text-align: end; font-family: var(--mono); direction: ltr; }
+  .conf { font-size: 0.72rem; color: var(--ink-faint); margin-top: -6px; margin-bottom: 12px; margin-inline-start: 130px; }
 
   .heuristics { margin-top: 18px; }
   .heuristics li { margin-bottom: 8px; font-size: 0.92rem; }
 
   .scenario { font-size: 1.02rem; margin-bottom: 18px; }
   .option {
-    display: block; width: 100%; text-align: left;
+    display: block; width: 100%; text-align: start;
     border: 1px solid var(--border); border-radius: 10px;
     background: var(--bg); color: var(--ink);
     padding: 12px 14px; margin-bottom: 10px; cursor: pointer;
@@ -149,7 +149,7 @@
   }
   .option:hover:not(:disabled) { border-color: var(--accent); }
   .option:disabled { cursor: default; }
-  .option .oid { font-weight: 700; margin-right: 6px; color: var(--accent); }
+  .option .oid { font-weight: 700; margin-inline-end: 6px; color: var(--accent); }
   .option.hit { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--bg)); }
   .option.miss-pred { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--bg)); }
   .option.chosen-wrong { outline: 2px dashed var(--ink-faint); outline-offset: 2px; }
@@ -158,7 +158,7 @@
   .reveal .verdict { font-weight: 700; margin-bottom: 8px; }
   .reveal .verdict.hit { color: var(--good); }
   .reveal .verdict.miss { color: var(--bad); }
-  .reveal ol { padding-left: 20px; margin: 0 0 6px; }
+  .reveal ol { padding-inline-start: 20px; margin: 0 0 6px; }
   .reveal li { margin-bottom: 6px; font-size: 0.9rem; color: var(--ink-soft); }
 
   .running { font-size: 0.85rem; color: var(--ink-faint); margin-top: 14px; }
@@ -166,50 +166,51 @@
   .summary-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 12px; }
   .summary-table td { padding: 5px 8px; border-bottom: 1px solid var(--border); }
   .summary-table td:first-child { color: var(--ink-soft); }
-  .summary-table td:not(:first-child) { text-align: right; font-family: var(--mono); }
+  .summary-table td:not(:first-child) { text-align: end; font-family: var(--mono); direction: ltr; }
 
   .locked { text-align: center; color: var(--ink-faint); padding: 30px 0; }
   .footer-note { font-size: 0.78rem; color: var(--ink-faint); margin-top: 24px; text-align: center; }
   code { font-family: var(--mono); background: var(--bar-bg); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+  bdi { unicode-bidi: isolate; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Choice Theory Personality Puzzles</h1>
-    <p>V0 — no language model. A logistic need-contest model predicts your choice before you make it, then shows the arithmetic.</p>
+    <h1>پازل‌های شخصیت بر پایه نظریه انتخاب</h1>
+    <p>نسخه صفر — بدون مدل زبانی. یک مدل رقابت نیازها (لجستیک) پیش از آن‌که انتخاب کنی، حدس خودش را می‌زند و بعد محاسبه را نشانت می‌دهد.</p>
   </header>
 
   <nav class="tabs">
-    <button id="tab-test" class="active" onclick="showTab('test')">1. Test</button>
-    <button id="tab-play" onclick="showTab('play')" disabled>2. Play (inference)</button>
+    <button id="tab-test" class="active" onclick="showTab('test')">۱. آزمون</button>
+    <button id="tab-play" onclick="showTab('play')" disabled>۲. بازی (استنتاج)</button>
   </nav>
 
   <div id="view-test"></div>
   <div id="view-play" style="display:none"></div>
 
   <p class="footer-note">
-    Client-side port of the Python V0 pipeline (<code>glasser_puzzles/</code>) — same items, same puzzle bank, same fitted β/α, same reasoning templates. Not a validated psychometric instrument; a self-reflection and research prototype only.
+    نسخه‌ی مرورگرمحورِ خط‌به‌خط از موتور پایتونیِ نسخه صفر (<code>glasser_puzzles/</code>) — همان پرسش‌ها، همان بانک پازل، همان بتا/آلفای برازش‌شده، همان الگوهای استدلال. این ابزار یک آزمون روان‌سنجی معتبر نیست؛ صرفاً یک نمونه‌ی پژوهشی برای خودشناسی است.
   </p>
 </div>
 
 <script>
 /* =========================================================================
-   Data — ported verbatim from the Python package (needs/items.py,
-   puzzles/bank/*.yaml, predict/params.json, profile/heuristics.py).
+   داده‌ها — برگرفته از بسته‌ی پایتون (needs/items.py، puzzles/bank/*.yaml،
+   predict/params.json، profile/heuristics.py) و ترجمه‌شده به فارسی.
+   کلیدهای منطقی (id، need، contrast) دست‌نخورده باقی مانده‌اند؛ فقط متن‌ها
+   ترجمه شده‌اند.
    ========================================================================= */
-const DATA = {"items":[{"id":"S1","text":"I keep a financial cushion so an unexpected bill would not disrupt my life.","need":"survival","reverse":false},{"id":"S2","text":"Before committing to something new, I want to know exactly what could go wrong.","need":"survival","reverse":false},{"id":"S3","text":"I am comfortable leaving my future arrangements loose and unplanned.","need":"survival","reverse":true},{"id":"S4","text":"I would rather gamble on something uncertain than settle for something dependable.","need":"survival","reverse":true},{"id":"B1","text":"A day feels incomplete if I have not had a real conversation with someone I care about.","need":"belonging","reverse":false},{"id":"B2","text":"I will change my own plans to keep someone close to me from feeling let down.","need":"belonging","reverse":false},{"id":"B3","text":"I am content spending long stretches of time without contacting anyone.","need":"belonging","reverse":true},{"id":"B4","text":"I make the decisions that matter to me without needing to talk them through with anyone.","need":"belonging","reverse":true},{"id":"P1","text":"I want the work I do to be visibly better than what was expected of me.","need":"power","reverse":false},{"id":"P2","text":"Being recognised as good at something matters to me more than I usually admit.","need":"power","reverse":false},{"id":"P3","text":"I am content to contribute without anyone knowing which part was mine.","need":"power","reverse":true},{"id":"P4","text":"I have no particular wish to be the best at the things I do.","need":"power","reverse":true},{"id":"F1","text":"Being told exactly how to do something makes me want to do it my own way instead.","need":"freedom","reverse":false},{"id":"F2","text":"I would accept a smaller reward if it meant nobody could tell me how to spend my time.","need":"freedom","reverse":false},{"id":"F3","text":"I would rather someone else set the rules so that I do not have to decide.","need":"freedom","reverse":true},{"id":"F4","text":"Committing myself to a long arrangement does not feel like giving anything up.","need":"freedom","reverse":true},{"id":"U1","text":"I go out of my way to learn things that have no practical use to me.","need":"fun","reverse":false},{"id":"U2","text":"I lose track of time when something turns out to be more interesting than I expected.","need":"fun","reverse":false},{"id":"U3","text":"I prefer activities whose outcome I can already predict.","need":"fun","reverse":true},{"id":"U4","text":"I would rather repeat something I know I enjoy than take a chance on something new.","need":"fun","reverse":true},{"id":"C1","text":"When someone close to me behaves badly, I focus on what I can change in how I respond.","need":null,"reverse":false},{"id":"C2","text":"If people would just take my advice, most of my frustrations would disappear.","need":null,"reverse":true},{"id":"C3","text":"When something goes wrong between me and someone else, it is usually because they would not listen.","need":null,"reverse":true}],"puzzles":[{"id":"BF1","contrast":["belonging","freedom"],"scenario":"Every Sunday your family expects you for lunch. It has been like this for years. It is the only reliable day you have with nothing scheduled, and lately Sunday is the day you most want back.","options":[{"id":"A","need":"freedom","text":"Tell them you will come once or twice a month, and take the other Sundays back."},{"id":"B","need":"belonging","text":"Keep going every week. It is the one thing that keeps everyone in the same room."},{"id":"C","need":"fun","text":"Keep going, but start suggesting things to do afterwards so it is not only the table."},{"id":"D","need":"power","text":"Keep going and take over the organising, so at least it runs the way you would run it."}]},{"id":"BF2","contrast":["belonging","freedom"],"scenario":"A group you are close to is planning two weeks away together, booking everything as one block. You want to see them. You do not want a fortnight where every day is already decided by a spreadsheet.","options":[{"id":"A","need":"belonging","text":"Book the whole thing with them. Two weeks with these people is the point."},{"id":"B","need":"freedom","text":"Join for the first week and do the second on your own terms."},{"id":"C","need":"fun","text":"Go along with all of it \u2014 half of what you would remember is the stuff you would not have chosen."},{"id":"D","need":"survival","text":"Book your own flights and accommodation alongside theirs, so you are not locked to the group."}]},{"id":"BF3","contrast":["belonging","freedom"],"scenario":"Someone you are close to has started calling most evenings. You like them and you do not want the calls to stop. You have also noticed you have stopped starting anything after seven, because the phone might go.","options":[{"id":"A","need":"freedom","text":"Tell them you will not always pick up, and let that be normal between you."},{"id":"B","need":"belonging","text":"Keep answering. Someone ringing you most evenings is not a problem most people have."},{"id":"C","need":"power","text":"Suggest a fixed evening slot, so the calls stop eating the whole week."},{"id":"D","need":"fun","text":"Start doing something during the calls, so the evening is not only the phone."}]},{"id":"BU1","contrast":["belonging","fun"],"scenario":"Two invitations, same evening. One is a small dinner with people you have known for fifteen years, and you know exactly how it will go. The other is a thing you have never done, with people you barely know, that might be excellent or might be two hours you would rather have back.","options":[{"id":"A","need":"fun","text":"Take the unknown one. You already know how the dinner goes."},{"id":"B","need":"belonging","text":"Take the dinner. Knowing exactly how it will go is not a mark against it."},{"id":"C","need":"freedom","text":"Decline both and take the evening for yourself."},{"id":"D","need":"power","text":"Take the unfamiliar one \u2014 the people there are worth knowing."}]},{"id":"BU2","contrast":["belonging","fun"],"scenario":"You have taken up something new and you are bad at it in the way that is still enjoyable. Your usual group has started making a running joke of it. It is affectionate, and it is also beginning to take the edge off the thing.","options":[{"id":"A","need":"fun","text":"Keep at it and stop mentioning it to them."},{"id":"B","need":"belonging","text":"Keep mentioning it. The joke is how that group shows it is paying attention."},{"id":"C","need":"power","text":"Get properly good at it, and let that end the joke on its own."},{"id":"D","need":"freedom","text":"Say once that you would rather they dropped it, and leave it at that."}]},{"id":"BU3","contrast":["belonging","fun"],"scenario":"A weekend away is being planned. The group wants the same house they have booked for four years running. You suggested somewhere different and it did not land. Nobody minds either way except you, mildly.","options":[{"id":"A","need":"belonging","text":"Go with the usual house. It works, and being the one who pushes is not worth it."},{"id":"B","need":"fun","text":"Push once more properly, with the alternative worked out so it is easy to say yes to."},{"id":"C","need":"freedom","text":"Go to the usual house and take yourself off for a day in the middle."},{"id":"D","need":"survival","text":"Go with the usual house \u2014 you know what it costs and what you are getting."}]},{"id":"BP1","contrast":["belonging","power"],"scenario":"A piece of work you largely did is being presented next week. Your colleague, who did the smaller half, has been asked to present it and is visibly pleased. Correcting the record is possible but would take something away from them.","options":[{"id":"A","need":"power","text":"Make sure the room knows which parts were yours. The work was yours and that should be on the record."},{"id":"B","need":"belonging","text":"Leave it. They are pleased, you work with them every day, and that is worth more than the credit."},{"id":"C","need":"freedom","text":"Say nothing and quietly stop putting your best work into things you do not control."},{"id":"D","need":"fun","text":"Let it go and put your energy into the next thing, which is more interesting anyway."}]},{"id":"BP2","contrast":["belonging","power"],"scenario":"You are up for something you want. So is a close friend, and only one of you can have it. They do not know you applied. You could mention it now, or wait and let the decision arrive on its own.","options":[{"id":"A","need":"belonging","text":"Tell them today, before they hear it from anyone else."},{"id":"B","need":"power","text":"Say nothing and compete properly. You both applied; that is what applying means."},{"id":"C","need":"freedom","text":"Withdraw. You would rather not have the thing than have it on these terms."},{"id":"D","need":"fun","text":"Tell them, and treat the whole thing as something to laugh about whichever way it lands."}]},{"id":"BP3","contrast":["belonging","power"],"scenario":"Your team is stuck. You can see the answer and you are fairly sure you are right. Saying so plainly would end the discussion an hour early and would also make two people look like they had been going the wrong way.","options":[{"id":"A","need":"power","text":"Say it plainly. Being right an hour earlier is worth more than an hour of everyone's comfort."},{"id":"B","need":"belonging","text":"Ask questions that get them there themselves, even if it takes the whole hour."},{"id":"C","need":"survival","text":"Put it in writing afterwards, so it is on record without a confrontation in the room."},{"id":"D","need":"freedom","text":"Say your piece once, then let the room do whatever it decides to do."}]},{"id":"FU1","contrast":["freedom","fun"],"scenario":"You have a free Saturday, the first in a while. A festival you would probably enjoy is on, but it means a timetable, a crowd, and being somewhere specific at specific times all day.","options":[{"id":"A","need":"fun","text":"Go. It is one day, and days like it are the reason you wanted a free Saturday."},{"id":"B","need":"freedom","text":"Stay out of it. The first free Saturday in months should not have a timetable."},{"id":"C","need":"belonging","text":"Go if the others are going, since that is the part that makes it worth the crowd."},{"id":"D","need":"survival","text":"Stay in. A day like that costs you the Sunday as well, and you know it."}]},{"id":"FU2","contrast":["freedom","fun"],"scenario":"A course you would genuinely enjoy runs for ten weeks, same evening every week, and they ask you not to join unless you can commit to all ten. You have been curious about the subject for years.","options":[{"id":"A","need":"fun","text":"Sign up for all ten. You have been curious about this for years."},{"id":"B","need":"freedom","text":"Skip it. Ten fixed evenings is a bigger promise than the subject is a pull."},{"id":"C","need":"power","text":"Sign up \u2014 ten weeks is how you actually get good at something rather than dabbling."},{"id":"D","need":"belonging","text":"Sign up if you can talk someone into doing it with you."}]},{"id":"FU3","contrast":["freedom","fun"],"scenario":"You have three weeks off. You could book a trip now \u2014 flights, rooms, the lot \u2014 and know it will be good. Or you could leave it entirely open and decide each morning, which might be the best three weeks you have had or might be three weeks of not quite getting round to things.","options":[{"id":"A","need":"freedom","text":"Leave it open. Deciding each morning is the actual holiday."},{"id":"B","need":"fun","text":"Book it. Booked trips are how you end up somewhere you would never have got round to."},{"id":"C","need":"survival","text":"Book it. Three unplanned weeks is how three weeks disappear."},{"id":"D","need":"belonging","text":"Book it around whoever can get the same time off."}]},{"id":"PF1","contrast":["power","freedom"],"scenario":"You are offered a step up: more scope, more say in what gets built, and a standing commitment to four fixed days a week in an office forty minutes away. You have worked to your own shape for three years.","options":[{"id":"A","need":"power","text":"Take it. Scope like this is what the last three years were for."},{"id":"B","need":"freedom","text":"Turn it down. Four fixed days is a bigger change than the scope is a gain."},{"id":"C","need":"fun","text":"Take it if the work itself is the interesting kind, and not otherwise."},{"id":"D","need":"belonging","text":"Take it \u2014 being in the room with people every day is worth the commute."}]},{"id":"PF2","contrast":["power","freedom"],"scenario":"Something you built alone is getting used more than you expected. You could hand it to a team who would take it much further than you can, or keep it as yours and let it grow at whatever pace you have time for.","options":[{"id":"A","need":"freedom","text":"Keep it. It grows slower, but it stays the thing you decided it was."},{"id":"B","need":"power","text":"Hand it over. It should be as good as it can be, and you cannot get it there alone."},{"id":"C","need":"belonging","text":"Hand it over and stay involved, so it becomes something you built with people."},{"id":"D","need":"fun","text":"Hand it over and go and start the next thing, which is the part you like anyway."}]},{"id":"PF3","contrast":["power","freedom"],"scenario":"An industry group invites you onto a committee that sets standards in your field. Real influence over how things get done. It also means two years of meetings, agendas, and other people's process.","options":[{"id":"A","need":"power","text":"Join. If people are going to set the rules, better that you are one of them."},{"id":"B","need":"freedom","text":"Decline. Two years of other people's agendas is the exact thing you have arranged your life to avoid."},{"id":"C","need":"survival","text":"Join. Being known in the field is what keeps work coming in the lean years."},{"id":"D","need":"belonging","text":"Join, mostly because two of the people on it are people you would like to know properly."}]},{"id":"PU1","contrast":["power","fun"],"scenario":"You have two projects and time for one. The first is squarely in what you are known for and would be the best thing you have done in that line. The second is in an area you know almost nothing about, and you would be starting from the bottom in public.","options":[{"id":"A","need":"power","text":"Do the first. Doing your best work in the thing you are known for is not a small thing."},{"id":"B","need":"fun","text":"Do the second. Knowing nothing about it is the reason to do it."},{"id":"C","need":"survival","text":"Do the first. Starting from the bottom in public is expensive at this point."},{"id":"D","need":"freedom","text":"Do the second \u2014 nobody has expectations about you in that field yet."}]},{"id":"PU2","contrast":["power","fun"],"scenario":"A talk you are giving is nearly ready. It is solid and it will land. Three days out, you think of a different version \u2014 riskier, more interesting, and you are not sure you can get it finished properly in time.","options":[{"id":"A","need":"fun","text":"Rebuild it. The interesting version is the one you would want to sit through."},{"id":"B","need":"power","text":"Give the solid one. A talk that lands is the point of giving a talk."},{"id":"C","need":"survival","text":"Give the solid one. Three days is not enough to gamble a room on."},{"id":"D","need":"belonging","text":"Ask two people you trust which one they would rather hear, and go with that."}]},{"id":"PU3","contrast":["power","fun"],"scenario":"You have got quite good at something you originally took up because it was enjoyable. There is now a competitive version of it, with rankings. Entering would change how you spend the time; not entering means staying where you are, which you like.","options":[{"id":"A","need":"fun","text":"Stay where you are. You took it up because it was enjoyable and it still is."},{"id":"B","need":"power","text":"Enter. You are good enough that it would be strange not to find out how good."},{"id":"C","need":"belonging","text":"Enter if the people you do it with are entering, and not otherwise."},{"id":"D","need":"freedom","text":"Stay out. The moment there are rankings, someone else decides what you are doing it for."}]},{"id":"SB1","contrast":["survival","belonging"],"scenario":"Your sister asks to borrow most of the savings you have been building for two years. She wants to start something on her own and has asked you before anyone else. She is serious about it, but her plan is still rough, and if it does not work the money is gone.","options":[{"id":"A","need":"survival","text":"Offer a much smaller amount \u2014 enough to help, small enough that losing it would not set you back."},{"id":"B","need":"belonging","text":"Lend her what she asked for. She came to you first, and you would rather be the person she can come to."},{"id":"C","need":"power","text":"Tell her you will fund it once the two of you have worked the plan into something solid."},{"id":"D","need":"freedom","text":"Say you would rather not tie your money to anyone else's plans, and leave it there."}]},{"id":"SB2","contrast":["survival","belonging"],"scenario":"You are offered a job in another city. The pay is better and the contract is long, which would settle a question that has been hanging over you for years. The people you see every week are all here, and none of them are moving.","options":[{"id":"A","need":"belonging","text":"Stay. The pay gap is real, but the people here are what you would actually be giving up."},{"id":"B","need":"survival","text":"Take it. A long contract is the thing you have been trying to get hold of."},{"id":"C","need":"fun","text":"Take it as an experiment \u2014 a year somewhere unfamiliar, and see what the place turns out to be."},{"id":"D","need":"freedom","text":"Turn it down and go independent instead, so that no employer decides where you live."}]},{"id":"SB3","contrast":["survival","belonging"],"scenario":"Something is going round at work and half your team has had it. Tonight is a close friend's birthday dinner, twelve people in a small room. You said weeks ago that you would be there. You have a stretch of work coming that would be very hard to do while ill.","options":[{"id":"A","need":"survival","text":"Send your apologies. Getting ill this month would cost you more than one dinner is worth."},{"id":"B","need":"belonging","text":"Go. You said you would, and yours is the absence they would notice."},{"id":"C","need":"fun","text":"Go, and talk them into moving it somewhere with more air and fewer walls."},{"id":"D","need":"power","text":"Go for the first hour, make sure your toast lands, and leave before the room fills up."}]},{"id":"SF1","contrast":["survival","freedom"],"scenario":"Your landlord offers a three-year lease at a rent you can afford, on the condition that you commit now. The flat is fine. Signing means you know exactly where you will be living in 2029, which is either a relief or a weight depending on the day.","options":[{"id":"A","need":"survival","text":"Sign. Three years of a rent you can predict is worth more than keeping your options open."},{"id":"B","need":"freedom","text":"Stay on the rolling contract and pay more for the ability to leave whenever you want."},{"id":"C","need":"fun","text":"Decline and start looking somewhere with more going on, even if it costs more."},{"id":"D","need":"belonging","text":"Sign if the people you see most are staying nearby, and not otherwise."}]},{"id":"SF2","contrast":["survival","freedom"],"scenario":"You are offered a permanent role at the place you have been contracting for. Same work, less money, but a pension, sick pay and a notice period. You have been contracting for nine years.","options":[{"id":"A","need":"freedom","text":"Stay contracting. The money is not the point; not having a notice period is."},{"id":"B","need":"survival","text":"Take the permanent role. Nine years without sick pay is long enough."},{"id":"C","need":"power","text":"Take it only if it comes with a senior title and a team."},{"id":"D","need":"belonging","text":"Take it \u2014 being properly part of the place, rather than adjacent to it, is worth the pay cut."}]},{"id":"SF3","contrast":["survival","freedom"],"scenario":"A relative offers to put money into your flat deposit. It would get you into a place years earlier than you could manage alone. They have not attached conditions, but they are the sort of person who mentions things later.","options":[{"id":"A","need":"freedom","text":"Turn it down. You would rather wait longer than have that hanging over you."},{"id":"B","need":"survival","text":"Accept. Being out of the rental market years earlier is worth some awkwardness."},{"id":"C","need":"belonging","text":"Accept, and treat it as the kind of thing families do for each other."},{"id":"D","need":"power","text":"Accept it as a formal loan with a written schedule, so it is yours on paper."}]},{"id":"SU1","contrast":["survival","fun"],"scenario":"You have four days off and enough money for one of two things: a course in something you have been curious about for years but will never earn from, or topping up the account you dip into when something breaks.","options":[{"id":"A","need":"fun","text":"Do the course. You have been circling this for years and four free days rarely line up."},{"id":"B","need":"survival","text":"Top up the account. The last time something broke you felt it for months."},{"id":"C","need":"belonging","text":"Spend the four days with people you have not properly seen in a while."},{"id":"D","need":"power","text":"Spend it on the certification that would actually move you up at work."}]},{"id":"SU2","contrast":["survival","fun"],"scenario":"A friend has a spare place on a trip leaving in nine days. It is somewhere you have wanted to go. Saying yes means using leave you were holding back in case something went wrong later in the year.","options":[{"id":"A","need":"survival","text":"Keep the leave. You held it back for a reason and the year is not over."},{"id":"B","need":"fun","text":"Go. Nine days' notice is exactly how the good ones happen."},{"id":"C","need":"belonging","text":"Go, mostly because it is nine days with that particular friend."},{"id":"D","need":"freedom","text":"Go, and stay on a week longer by yourself once the group flies home."}]},{"id":"SU3","contrast":["survival","fun"],"scenario":"Your car is old but running. You can afford either a thorough service that will keep it going another three years, or the thing you have had a tab open for since spring.","options":[{"id":"A","need":"fun","text":"Buy the thing. The car is running fine and you have wanted this since spring."},{"id":"B","need":"survival","text":"Service the car. It is running fine because it has been looked after."},{"id":"C","need":"power","text":"Do neither and put it toward the thing you have been telling people you would do."},{"id":"D","need":"freedom","text":"Service it \u2014 a car that might strand you is a car that decides your week for you."}]},{"id":"SP1","contrast":["survival","power"],"scenario":"Your manager offers you the lead on a project with real visibility. It is the kind of thing people get promoted off. It is also badly resourced, on a timetable you think is wrong, and if it fails it will fail publicly with your name on it.","options":[{"id":"A","need":"power","text":"Take it. Work this visible does not come round often, and you would rather be the one holding it."},{"id":"B","need":"survival","text":"Decline politely. A public failure would cost you more than a quiet year would."},{"id":"C","need":"freedom","text":"Take it only if you get to set the timetable and pick the people yourself."},{"id":"D","need":"belonging","text":"Ask to lead it jointly with someone you trust, so neither of you carries it alone."}]},{"id":"SP2","contrast":["survival","power"],"scenario":"You have been quietly good at your job for six years. A competitor offers you a title you have wanted for a long time, at a company that has had two rounds of layoffs and might not exist in three years.","options":[{"id":"A","need":"survival","text":"Stay where you are. A title on a company that folds is not worth much."},{"id":"B","need":"power","text":"Take it. Six quiet years is long enough, and the title is the thing you have been waiting for."},{"id":"C","need":"fun","text":"Take it because the work itself sounds more interesting than what you do now."},{"id":"D","need":"freedom","text":"Use the offer to go consulting, where nobody hands out the titles anyway."}]},{"id":"SP3","contrast":["survival","power"],"scenario":"A contract you rely on comes up for renewal. The client hints they will renew at a lower rate. You know your work is worth more than they are offering, and you also know they are your steadiest income.","options":[{"id":"A","need":"power","text":"Hold your rate and let them decide. Accepting less would say something you do not want said."},{"id":"B","need":"survival","text":"Accept the lower rate. Steady work is worth more than being right about your price."},{"id":"C","need":"belonging","text":"Talk to them properly first \u2014 you have worked together a long time and that ought to count."},{"id":"D","need":"freedom","text":"Let it go and use the gap to take on work you actually chose."}]}],"params":{"beta":2.335598377592894,"alpha":{"survival":0.0,"belonging":0.1734449967959889,"power":-0.1756099320435233,"freedom":0.10062638444847634,"fun":0.0002757524359122867}},"contrastHeuristics":{"survival|belonging":"secures their own footing before extending help to others","belonging|survival":"absorbs a personal cost rather than let someone down","survival|power":"takes the steady option over the visible one","power|survival":"accepts real exposure for work that carries their name","survival|freedom":"trades room to manoeuvre for knowing where they stand","freedom|survival":"pays a premium, in money or security, to keep their options open","survival|fun":"settles the ground before spending anything on curiosity","fun|survival":"will spend a reserve on something interesting rather than sit on it","belonging|power":"lets credit go rather than put a working relationship under strain","power|belonging":"wants their specific contribution identified, even at a social cost","belonging|freedom":"keeps standing commitments to people even when they chafe","freedom|belonging":"protects their own time even when it disappoints someone close","belonging|fun":"chooses familiar company over the novel experience","fun|belonging":"follows something interesting away from the people they know","power|freedom":"accepts someone else's process when it buys real influence","freedom|power":"turns down scope that arrives with somebody else's schedule attached","power|fun":"channels curiosity into things that build a visible record","fun|power":"follows what is interesting even when it means starting at the bottom","freedom|fun":"guards unstructured time against even enjoyable commitments","fun|freedom":"signs up to a fixed commitment when the subject pulls hard enough"},"controlHeuristics":[{"lo":-1.01,"hi":-0.45,"text":"expects things to improve once other people take their advice"},{"lo":-0.45,"hi":-0.15,"text":"tends to locate the problem in what the other person did"},{"lo":0.15,"hi":0.45,"text":"looks at their own part before assigning fault"},{"lo":0.45,"hi":1.01,"text":"starts from what they can change in themselves when something goes wrong"}]};
+const DATA = {"items":[{"id":"S1","text":"همیشه یک پس‌انداز کنار می‌گذارم تا یک هزینه غیرمنتظره زندگی‌ام را به‌هم نریزد.","need":"survival","reverse":false},{"id":"S2","text":"پیش از متعهد شدن به چیزی تازه، می‌خواهم دقیقاً بدانم چه چیزی ممکن است اشتباه پیش برود.","need":"survival","reverse":false},{"id":"S3","text":"با نامشخص و بی‌برنامه گذاشتن تنظیمات آینده‌ام راحتم.","need":"survival","reverse":true},{"id":"S4","text":"ترجیح می‌دهم روی چیزی نامطمئن شرط ببندم تا به یک گزینه قابل‌اعتماد قناعت کنم.","need":"survival","reverse":true},{"id":"B1","text":"اگر در طول روز یک گفتگوی واقعی با کسی که برایم اهمیت دارد نداشته باشم، آن روز ناتمام به نظر می‌رسد.","need":"belonging","reverse":false},{"id":"B2","text":"برنامه‌های خودم را تغییر می‌دهم تا کسی که به من نزدیک است احساس ناامیدی نکند.","need":"belonging","reverse":false},{"id":"B3","text":"از گذراندن مدت‌های طولانی بدون تماس با کسی احساس رضایت می‌کنم.","need":"belonging","reverse":true},{"id":"B4","text":"تصمیم‌های مهم زندگی‌ام را بدون نیاز به مشورت با کسی می‌گیرم.","need":"belonging","reverse":true},{"id":"P1","text":"می‌خواهم کاری که انجام می‌دهم آشکارا بهتر از چیزی باشد که از من انتظار می‌رفت.","need":"power","reverse":false},{"id":"P2","text":"دیده‌شدن به‌عنوان کسی که در کاری خوب است، بیشتر از آن‌چه معمولاً قبول می‌کنم برایم اهمیت دارد.","need":"power","reverse":false},{"id":"P3","text":"راضی‌ام که در کاری سهیم باشم بدون آن‌که کسی بداند کدام بخش کار من بوده است.","need":"power","reverse":true},{"id":"P4","text":"علاقه خاصی به بهترین‌بودن در کارهایی که انجام می‌دهم ندارم.","need":"power","reverse":true},{"id":"F1","text":"وقتی دقیقاً به من بگویند چطور کاری را انجام دهم، بیشتر دلم می‌خواهد آن را به روش خودم انجام دهم.","need":"freedom","reverse":false},{"id":"F2","text":"پاداش کمتر را می‌پذیرم اگر یعنی هیچ‌کس نتواند به من بگوید وقتم را چگونه بگذرانم.","need":"freedom","reverse":false},{"id":"F3","text":"ترجیح می‌دهم شخص دیگری قوانین را تعیین کند تا مجبور به تصمیم‌گیری نباشم.","need":"freedom","reverse":true},{"id":"F4","text":"متعهد شدن به یک قرارداد بلندمدت برایم حس از دست‌دادن چیزی را ندارد.","need":"freedom","reverse":true},{"id":"U1","text":"برای یادگیری چیزهایی که هیچ کاربرد عملی برایم ندارند، وقت و انرژی اضافه می‌گذارم.","need":"fun","reverse":false},{"id":"U2","text":"وقتی چیزی جالب‌تر از انتظارم از آب درمی‌آید، حس زمان را از دست می‌دهم.","need":"fun","reverse":false},{"id":"U3","text":"فعالیت‌هایی را ترجیح می‌دهم که از قبل نتیجه‌شان را می‌دانم.","need":"fun","reverse":true},{"id":"U4","text":"ترجیح می‌دهم کاری را که می‌دانم از آن لذت می‌برم تکرار کنم تا این‌که ریسک چیزی تازه را بپذیرم.","need":"fun","reverse":true},{"id":"C1","text":"وقتی کسی که به من نزدیک است رفتار بدی نشان می‌دهد، تمرکزم روی چیزی است که می‌توانم در واکنش خودم تغییر دهم.","need":null,"reverse":false},{"id":"C2","text":"اگر مردم فقط توصیه‌های مرا می‌پذیرفتند، بیشتر ناامیدی‌های من از بین می‌رفت.","need":null,"reverse":true},{"id":"C3","text":"وقتی چیزی بین من و شخص دیگری خراب می‌شود، معمولاً به این دلیل است که او گوش نمی‌داد.","need":null,"reverse":true}],"puzzles":[{"id":"BF1","contrast":["belonging","freedom"],"scenario":"هر یکشنبه خانواده‌ات منتظرت هستند برای ناهار. سال‌هاست همین‌طور بوده. تنها روز مطمئنی‌ست که هیچ برنامه‌ای در آن نداری، و این اواخر یکشنبه همان روزی‌ست که بیشتر از همه دلت می‌خواهد پس بگیری.","options":[{"id":"A","need":"freedom","text":"به آن‌ها بگو ماهی یکی دو بار می‌آیی، و بقیه یکشنبه‌ها را برای خودت پس بگیر."},{"id":"B","need":"belonging","text":"همچنان هر هفته برو. این تنها چیزی‌ست که همه را در یک اتاق کنار هم نگه می‌دارد."},{"id":"C","need":"fun","text":"همچنان برو، اما شروع کن پیشنهاد کارهایی برای بعد از ناهار بدهی تا فقط پای میز نباشد."},{"id":"D","need":"power","text":"همچنان برو و سازمان‌دهی‌اش را خودت به دست بگیر، تا حداقل به شکلی که خودت می‌خواهی پیش برود."}]},{"id":"BF2","contrast":["belonging","freedom"],"scenario":"گروهی که به آن‌ها نزدیکی، برنامه‌ریزی کرده‌اند دو هفته را با هم به سفر بروند و همه‌چیز را یک‌جا رزرو کنند. دلت می‌خواهد آن‌ها را ببینی. اما نمی‌خواهی دو هفته‌ای داشته باشی که هر روزش از قبل توسط یک جدول تعیین شده باشد.","options":[{"id":"A","need":"belonging","text":"کل سفر را با آن‌ها رزرو کن. دو هفته با این آدم‌ها همان چیزی‌ست که اهمیت دارد."},{"id":"B","need":"freedom","text":"هفته اول را با آن‌ها باش و هفته دوم را به شرایط خودت بگذران."},{"id":"C","need":"fun","text":"با همه‌اش همراه شو — نیمی از خاطراتی که می‌مانند همان چیزهایی‌ست که خودت انتخابشان نمی‌کردی."},{"id":"D","need":"survival","text":"پرواز و اقامتگاه خودت را جدا از آن‌ها رزرو کن، تا به گروه قفل نشوی."}]},{"id":"BF3","contrast":["belonging","freedom"],"scenario":"کسی که به او نزدیکی، این اواخر بیشتر عصرها زنگ می‌زند. او را دوست داری و نمی‌خواهی این تماس‌ها تمام شوند. اما متوجه شده‌ای که دیگر بعد از ساعت هفت هیچ کاری را شروع نمی‌کنی، چون ممکن است تلفن زنگ بزند.","options":[{"id":"A","need":"freedom","text":"به او بگو همیشه گوشی را برنمی‌داری، و بگذار این موضوع بین‌تان عادی شود."},{"id":"B","need":"belonging","text":"همچنان جواب بده. این‌که کسی بیشتر عصرها به تو زنگ بزند مشکلی نیست که خیلی‌ها داشته باشند."},{"id":"C","need":"power","text":"پیشنهاد یک زمان ثابت عصرگاهی بده، تا تماس‌ها کل هفته را نخورند."},{"id":"D","need":"fun","text":"شروع کن هنگام تماس کاری هم انجام بدهی، تا عصر فقط صرفِ تلفن نشود."}]},{"id":"BU1","contrast":["belonging","fun"],"scenario":"دو دعوت، برای یک عصر. یکی یک شام کوچک با آدم‌هایی که پانزده سال است می‌شناسی‌شان، و دقیقاً می‌دانی چطور پیش می‌رود. دیگری چیزی‌ست که هرگز انجامش نداده‌ای، با آدم‌هایی که کم می‌شناسی‌شان، که ممکن است فوق‌العاده باشد یا دو ساعتی باشد که دلت بخواهد پسش بگیری.","options":[{"id":"A","need":"fun","text":"گزینه ناشناخته را انتخاب کن. آن‌طوری هم که هست، می‌دانی شام چطور پیش می‌رود."},{"id":"B","need":"belonging","text":"شام را انتخاب کن. دقیقاً دانستن این‌که چطور پیش می‌رود، نکته منفی‌اش نیست."},{"id":"C","need":"freedom","text":"هر دو را رد کن و عصر را برای خودت بگذار."},{"id":"D","need":"power","text":"گزینه ناآشنا را انتخاب کن — آدم‌های آن‌جا ارزش شناختن دارند."}]},{"id":"BU2","contrast":["belonging","fun"],"scenario":"کار تازه‌ای را شروع کرده‌ای و در آن بد هستی، اما به شکلی که هنوز هم لذت‌بخش است. جمع همیشگی‌ات شروع کرده‌اند درباره‌اش شوخی مداوم بسازند. شوخی از سر محبت است، اما کم‌کم دارد از هیجانِ کار کم می‌کند.","options":[{"id":"A","need":"fun","text":"همچنان ادامه بده و دیگر چیزی درباره‌اش به آن‌ها نگو."},{"id":"B","need":"belonging","text":"همچنان درباره‌اش حرف بزن. این شوخی‌ها روش آن جمع برای نشان‌دادن توجه‌شان است."},{"id":"C","need":"power","text":"واقعاً در آن خوب شو، و بگذار همین به‌تنهایی شوخی را تمام کند."},{"id":"D","need":"freedom","text":"یک‌بار بگو ترجیح می‌دهی دیگر این شوخی را نکنند، و همان‌جا تمامش کن."}]},{"id":"BU3","contrast":["belonging","fun"],"scenario":"یک آخر هفته سفر برنامه‌ریزی می‌شود. گروه همان خانه‌ای را می‌خواهد که چهار سال پشت‌سرهم رزرو کرده‌اند. تو جای دیگری را پیشنهاد دادی و مورد استقبال قرار نگرفت. هیچ‌کس جز تو، آن‌هم کمی، اهمیتی نمی‌دهد.","options":[{"id":"A","need":"belonging","text":"با همان خانه همیشگی برو. جواب می‌دهد، و کسی بودن که اصرار می‌کند ارزشش را ندارد."},{"id":"B","need":"fun","text":"یک‌بار دیگر درست‌وحسابی اصرار کن، با گزینه جایگزینی که آماده کرده‌ای تا گفتن بله برایش آسان باشد."},{"id":"C","need":"freedom","text":"به همان خانه برو و یک روز وسط سفر را برای خودت جدا کن."},{"id":"D","need":"survival","text":"با همان خانه همیشگی برو — می‌دانی چقدر هزینه دارد و چه چیزی گیرت می‌آید."}]},{"id":"BP1","contrast":["belonging","power"],"scenario":"کاری که بیشترش را تو انجام داده‌ای، هفته آینده ارائه می‌شود. همکارت که سهم کوچک‌تری داشته، برای ارائه‌اش انتخاب شده و آشکارا خوشحال است. تصحیح واقعیت ممکن است، اما چیزی از او می‌گیرد.","options":[{"id":"A","need":"power","text":"مطمئن شو همه در جلسه بدانند کدام بخش‌ها کار تو بوده. کار مال تو بوده و باید ثبت شود."},{"id":"B","need":"belonging","text":"بگذار همین‌طور بماند. او خوشحال است، هر روز با هم کار می‌کنید، و این بیشتر از اعتبار کار ارزش دارد."},{"id":"C","need":"freedom","text":"چیزی نگو و بی‌سروصدا دیگر بهترین کارت را در چیزهایی که کنترلشان دست تو نیست نگذار."},{"id":"D","need":"fun","text":"بگذار برود و انرژی‌ات را روی کار بعدی بگذار، که به‌هرحال جالب‌تر است."}]},{"id":"BP2","contrast":["belonging","power"],"scenario":"برای چیزی که می‌خواهی نامزد شده‌ای. یک دوست نزدیک هم همین‌طور، و فقط یکی از شما می‌تواند آن را داشته باشد. او نمی‌داند تو هم درخواست داده‌ای. می‌توانی همین حالا بگویی، یا صبر کنی و بگذاری تصمیم خودش برسد.","options":[{"id":"A","need":"belonging","text":"همین امروز به او بگو، قبل از این‌که از کس دیگری بشنود."},{"id":"B","need":"power","text":"چیزی نگو و درست رقابت کن. هر دو درخواست داده‌اید؛ معنای درخواست‌دادن همین است."},{"id":"C","need":"freedom","text":"کنار بکش. ترجیح می‌دهی آن چیز را نداشته باشی تا این‌که با این شرایط داشته باشی."},{"id":"D","need":"fun","text":"به او بگو، و کل ماجرا را چیزی بدان که هرطور تمام شود، جای خنده دارد."}]},{"id":"BP3","contrast":["belonging","power"],"scenario":"تیمت گیر کرده. جواب را می‌بینی و تقریباً مطمئنی که درست است. اگر رک بگویی، بحث یک ساعت زودتر تمام می‌شود، اما باعث می‌شود دو نفر این‌طور به نظر برسند که در مسیر اشتباه بوده‌اند.","options":[{"id":"A","need":"power","text":"رک بگو. یک ساعت زودتر حق‌به‌جانب بودن بیشتر از یک ساعت راحتی همه ارزش دارد."},{"id":"B","need":"belonging","text":"سؤالاتی بپرس که خودشان به جواب برسند، حتی اگر یک ساعت کامل طول بکشد."},{"id":"C","need":"survival","text":"بعداً آن را مکتوب کن، تا بدون رودررویی در جلسه، ثبت شده باشد."},{"id":"D","need":"freedom","text":"یک‌بار نظرت را بگو، بعد بگذار جلسه هر تصمیمی که می‌خواهد بگیرد."}]},{"id":"FU1","contrast":["freedom","fun"],"scenario":"یک شنبه آزاد داری، اولین‌بار بعد از مدتی. جشنواره‌ای برگزار می‌شود که احتمالاً از آن لذت می‌بری، اما یعنی برنامه زمانی، شلوغی، و بودن در جای مشخص در زمان‌های مشخص تمام روز.","options":[{"id":"A","need":"fun","text":"برو. فقط یک روز است، و روزهایی مثل همین، دلیل خواستنِ یک شنبه آزاد بودند."},{"id":"B","need":"freedom","text":"درگیرش نشو. اولین شنبه آزاد بعد از ماه‌ها نباید برنامه زمانی داشته باشد."},{"id":"C","need":"belonging","text":"فقط اگر بقیه هم می‌روند برو، چون همان بخشی‌ست که شلوغی را ارزشش می‌کند."},{"id":"D","need":"survival","text":"خانه بمان. چنین روزی یکشنبه‌ات را هم می‌گیرد، و خودت این را می‌دانی."}]},{"id":"FU2","contrast":["freedom","fun"],"scenario":"دوره‌ای که واقعاً از آن لذت می‌بری ده هفته طول می‌کشد، همان عصر هر هفته، و از تو می‌خواهند فقط در صورتی بپیوندی که بتوانی به هر ده جلسه متعهد بمانی. سال‌هاست به این موضوع کنجکاوی.","options":[{"id":"A","need":"fun","text":"برای هر ده جلسه ثبت‌نام کن. سال‌هاست به این موضوع کنجکاوی."},{"id":"B","need":"freedom","text":"بی‌خیالش شو. ده عصر ثابت، تعهدی بزرگ‌تر از جذابیت موضوع است."},{"id":"C","need":"power","text":"ثبت‌نام کن — ده هفته همان چیزی‌ست که واقعاً در چیزی خوب می‌شوی، نه فقط سرسری امتحانش می‌کنی."},{"id":"D","need":"belonging","text":"فقط اگر بتوانی کسی را راضی کنی همراهت بیاید، ثبت‌نام کن."}]},{"id":"FU3","contrast":["freedom","fun"],"scenario":"سه هفته مرخصی داری. می‌توانی همین حالا سفر را رزرو کنی — پرواز، اتاق، همه‌چیز — و مطمئن باشی خوب می‌شود. یا می‌توانی کاملاً باز بگذاری‌اش و هر صبح تصمیم بگیری، که ممکن است بهترین سه هفته عمرت باشد یا سه هفته‌ای که هیچ‌وقت درست به کارها نرسیدی.","options":[{"id":"A","need":"freedom","text":"بازش بگذار. تصمیم‌گرفتن هر صبح، خودِ واقعیِ تعطیلات است."},{"id":"B","need":"fun","text":"رزروش کن. سفرهای از پیش رزروشده همان راهی‌ست که به جایی می‌رسی که هیچ‌وقت خودت به آن نمی‌رسیدی."},{"id":"C","need":"survival","text":"رزروش کن. سه هفته بی‌برنامه دقیقاً همان‌طوری‌ست که سه هفته ناپدید می‌شود."},{"id":"D","need":"belonging","text":"بر اساس این‌که چه کسی می‌تواند هم‌زمان مرخصی بگیرد، رزروش کن."}]},{"id":"PF1","contrast":["power","freedom"],"scenario":"پیشنهاد ارتقا به تو داده شده: اختیارات بیشتر، حرف بیشتر در آن‌چه ساخته می‌شود، و تعهد ثابت به چهار روز ثابت در هفته در دفتری چهل دقیقه دورتر. سه سال است که به سبک خودت کار کرده‌ای.","options":[{"id":"A","need":"power","text":"قبولش کن. اختیاراتی از این نوع همان چیزی‌ست که این سه سال برایش بوده."},{"id":"B","need":"freedom","text":"ردش کن. چهار روز ثابت تغییری بزرگ‌تر از سودِ آن اختیارات است."},{"id":"C","need":"fun","text":"فقط در صورتی قبولش کن که خودِ کار از نوع جالبش باشد، وگرنه نه."},{"id":"D","need":"belonging","text":"قبولش کن — هر روز کنار آدم‌ها بودن ارزش رفت‌وآمد را دارد."}]},{"id":"PF2","contrast":["power","freedom"],"scenario":"چیزی که تنهایی ساخته‌ای بیشتر از انتظارت مورد استفاده قرار می‌گیرد. می‌توانی آن را به تیمی بسپاری که خیلی جلوتر از تو می‌برندش، یا آن را مال خودت نگه داری و بگذاری با هر سرعتی که وقت داری رشد کند.","options":[{"id":"A","need":"freedom","text":"نگهش دار. کندتر رشد می‌کند، اما همان چیزی می‌ماند که خودت تصمیم گرفتی باشد."},{"id":"B","need":"power","text":"بسپارش. باید تا جای ممکن خوب باشد، و تو به‌تنهایی نمی‌توانی به آن‌جا برسانی‌اش."},{"id":"C","need":"belonging","text":"بسپارش و درگیر بمان، تا چیزی شود که با آدم‌ها ساخته‌ای، نه تنهایی."},{"id":"D","need":"fun","text":"بسپارش و برو چیز بعدی را شروع کن، که به‌هرحال همان بخشی‌ست که دوستش داری."}]},{"id":"PF3","contrast":["power","freedom"],"scenario":"یک گروه صنفی از تو دعوت می‌کند به کمیته‌ای بپیوندی که استانداردهای حوزه کاری‌ات را تعیین می‌کند. تأثیرگذاری واقعی روی این‌که چطور کارها انجام می‌شوند. اما یعنی دو سال جلسه، دستورجلسه، و فرآیندهای دیگران.","options":[{"id":"A","need":"power","text":"بپیوند. اگر قرار است قوانین تعیین شوند، بهتر است تو هم یکی از آن‌ها باشی."},{"id":"B","need":"freedom","text":"ردش کن. دو سال دستورجلسه‌های دیگران دقیقاً همان چیزی‌ست که زندگی‌ات را طوری چیده‌ای تا از آن دور بمانی."},{"id":"C","need":"survival","text":"بپیوند. شناخته‌شده‌بودن در این حوزه چیزی‌ست که در سال‌های کم‌کاری، کار را جاری نگه می‌دارد."},{"id":"D","need":"belonging","text":"بپیوند، بیشتر به این خاطر که دو نفر از اعضای آن کسانی هستند که دوست داری بهتر بشناسی‌شان."}]},{"id":"PU1","contrast":["power","fun"],"scenario":"دو پروژه داری و وقت برای یکی. اولی دقیقاً همان چیزی‌ست که به آن شناخته می‌شوی و بهترین کاری خواهد بود که در آن زمینه انجام داده‌ای. دومی حوزه‌ای‌ست که تقریباً هیچ نمی‌دانی، و باید علنی از صفر شروع کنی.","options":[{"id":"A","need":"power","text":"اولی را انجام بده. بهترین کارت را در چیزی که به آن شناخته می‌شوی انجام دادن، چیز کمی نیست."},{"id":"B","need":"fun","text":"دومی را انجام بده. هیچ ندانستن درباره‌اش، همان دلیل انجام‌دادنش است."},{"id":"C","need":"survival","text":"اولی را انجام بده. علنی از صفر شروع کردن در این مرحله هزینه‌بر است."},{"id":"D","need":"freedom","text":"دومی را انجام بده — هنوز کسی در آن حوزه از تو انتظاری ندارد."}]},{"id":"PU2","contrast":["power","fun"],"scenario":"سخنرانی‌ای که قرار است بدهی تقریباً آماده است. محکم است و جواب می‌دهد. سه روز مانده، به نسخه دیگری فکر می‌کنی — پرریسک‌تر، جالب‌تر، و مطمئن نیستی بتوانی به‌درستی سر وقت تمامش کنی.","options":[{"id":"A","need":"fun","text":"دوباره بسازش. نسخه جالب‌تر همان چیزی‌ست که خودت هم دوست داشتی تا آخرش بنشینی و گوش بدهی."},{"id":"B","need":"power","text":"همان نسخه محکم را ارائه بده. هدف از سخنرانی، جواب‌دادنش است."},{"id":"C","need":"survival","text":"همان نسخه محکم را ارائه بده. سه روز کافی نیست که یک جلسه را به خطر بیندازی."},{"id":"D","need":"belonging","text":"از دو نفر که به آن‌ها اعتماد داری بپرس کدام را ترجیح می‌دهند بشنوند، و همان را انتخاب کن."}]},{"id":"PU3","contrast":["power","fun"],"scenario":"در چیزی که اولش فقط به‌خاطر لذتش شروعش کرده بودی، حسابی خوب شده‌ای. حالا نسخه رقابتی‌اش با رتبه‌بندی وجود دارد. شرکت‌کردن یعنی نحوه گذراندن وقتت تغییر کند؛ شرکت‌نکردن یعنی همان‌جایی بمانی که هستی، جایی که دوستش داری.","options":[{"id":"A","need":"fun","text":"همان‌جایی که هستی بمان. آن را به‌خاطر لذتش شروع کردی و هنوز هم لذت‌بخش است."},{"id":"B","need":"power","text":"شرکت کن. آن‌قدر خوب هستی که شرکت‌نکردن و نفهمیدنِ چقدر خوب بودنت عجیب خواهد بود."},{"id":"C","need":"belonging","text":"فقط اگر آدم‌هایی که با آن‌ها این کار را می‌کنی شرکت کنند، تو هم شرکت کن، وگرنه نه."},{"id":"D","need":"freedom","text":"کنار بمان. از لحظه‌ای که رتبه‌بندی باشد، شخص دیگری تصمیم می‌گیرد این کار را برای چه انجام می‌دهی."}]},{"id":"SB1","contrast":["survival","belonging"],"scenario":"خواهرت از تو می‌خواهد بیشتر پس‌اندازی را که طی دو سال جمع کرده‌ای قرض بگیرد. او می‌خواهد کسب‌وکار خودش را شروع کند و پیش از هر کس دیگری از تو خواسته است. او جدی است، اما برنامه‌اش هنوز خام است و اگر جواب ندهد، پول از دست می‌رود.","options":[{"id":"A","need":"survival","text":"مبلغ خیلی کمتری پیشنهاد بده — به‌اندازه‌ای که کمک کند، اما آن‌قدر کم که از دست دادنش عقبت نیندازد."},{"id":"B","need":"belonging","text":"همان مبلغی را که خواسته قرض بده. او اول پیش تو آمده و تو دوست داری همان کسی باشی که می‌تواند به او تکیه کند."},{"id":"C","need":"power","text":"به او بگو وقتی با هم برنامه را به چیزی محکم تبدیل کردید، تأمین مالی‌اش می‌کنی."},{"id":"D","need":"freedom","text":"بگو ترجیح می‌دهی پولت را به برنامه‌های کس دیگری گره نزنی، و همین‌جا تمامش کن."}]},{"id":"SB2","contrast":["survival","belonging"],"scenario":"پیشنهاد کاری در شهری دیگر به تو داده شده. حقوق بهتر است و قرارداد بلندمدت است، چیزی که سال‌ها ذهنت را درگیر کرده بود حل می‌کند. اما آدم‌هایی که هر هفته می‌بینی همه همین‌جا هستند و هیچ‌کدام قصد جابه‌جایی ندارند.","options":[{"id":"A","need":"belonging","text":"بمان. تفاوت حقوق واقعی است، اما آدم‌هایی که اینجا هستند چیزی‌ست که واقعاً از دست می‌دهی."},{"id":"B","need":"survival","text":"قبولش کن. یک قرارداد بلندمدت همان چیزی‌ست که مدت‌ها دنبالش بودی."},{"id":"C","need":"fun","text":"آن را مثل یک آزمایش قبول کن — یک سال در جایی ناآشنا، و ببین آن‌جا چه از آب درمی‌آید."},{"id":"D","need":"freedom","text":"ردش کن و به‌جایش مستقل کار کن، تا هیچ کارفرمایی تصمیم نگیرد کجا زندگی کنی."}]},{"id":"SB3","contrast":["survival","belonging"],"scenario":"یک بیماری در محل کارت در حال چرخیدن است و نیمی از تیمت گرفتارش شده‌اند. امشب جشن تولد یک دوست نزدیک است، دوازده نفر در یک اتاق کوچک. هفته‌ها پیش گفته بودی که می‌آیی. مدتی از کارِ سنگین پیش رو داری که انجامش در حال بیماری خیلی سخت خواهد بود.","options":[{"id":"A","need":"survival","text":"عذرخواهی کن و نرو. مریض‌شدن در این ماه بیشتر از ارزش یک شام برایت هزینه دارد."},{"id":"B","need":"belonging","text":"برو. قول داده بودی، و نبودِ تو همان چیزی‌ست که همه متوجهش می‌شوند."},{"id":"C","need":"fun","text":"برو، و همه را راضی کن جشن را جایی با هوای بازتر و دیوارهای کمتر ببرند."},{"id":"D","need":"power","text":"فقط یک ساعت اول برو، مطمئن شو نوبت خودت خوب پیش می‌رود، و پیش از پر شدن اتاق برو."}]},{"id":"SF1","contrast":["survival","freedom"],"scenario":"صاحب‌خانه‌ات یک قرارداد سه‌ساله با اجاره‌ای که از پسش برمی‌آیی پیشنهاد می‌دهد، به شرط این‌که همین حالا متعهد شوی. آپارتمان خوب است. امضا کردن یعنی دقیقاً می‌دانی سال ۲۰۲۹ کجا زندگی می‌کنی، که بسته به روز، گاهی آرامش‌بخش است و گاهی سنگین.","options":[{"id":"A","need":"survival","text":"امضا کن. سه سال اجاره‌ای قابل‌پیش‌بینی بیشتر از باز نگه‌داشتن گزینه‌ها ارزش دارد."},{"id":"B","need":"freedom","text":"روی قرارداد کوتاه‌مدت بمان و برای توانایی رفتن هر زمان که خواستی، بیشتر پرداخت کن."},{"id":"C","need":"fun","text":"ردش کن و شروع کن به دنبال جایی بگردی که اتفاقات بیشتری در آن می‌افتد، حتی اگر گران‌تر باشد."},{"id":"D","need":"belonging","text":"فقط در صورتی امضا کن که آدم‌هایی که بیشتر می‌بینی هم همان اطراف بمانند، وگرنه نه."}]},{"id":"SF2","contrast":["survival","freedom"],"scenario":"به تو پیشنهاد یک موقعیت دائمی در جایی که سال‌ها به‌صورت پیمانی برایش کار کرده‌ای داده شده. همان کار، پول کمتر، اما بازنشستگی، مرخصی استعلاجی و دوره اطلاع قبلی. نه سال است که به‌صورت پیمانی کار می‌کنی.","options":[{"id":"A","need":"freedom","text":"همان‌طور پیمانی بمان. موضوع پول نیست؛ نداشتن دوره اطلاع قبلی مهم است."},{"id":"B","need":"survival","text":"موقعیت دائمی را قبول کن. نه سال بدون مرخصی استعلاجی کافی بوده."},{"id":"C","need":"power","text":"فقط در صورتی قبولش کن که با یک عنوان ارشد و یک تیم همراه باشد."},{"id":"D","need":"belonging","text":"قبولش کن — واقعاً بخشی از آن‌جا بودن، به‌جای فقط نزدیک آن بودن، ارزش کاهش حقوق را دارد."}]},{"id":"SF3","contrast":["survival","freedom"],"scenario":"یکی از بستگانت پیشنهاد می‌دهد در پیش‌پرداخت خانه‌ات کمک مالی کند. این کار سال‌ها زودتر از آن‌چه به‌تنهایی می‌توانستی، تو را صاحب خانه می‌کند. او شرطی نگذاشته، اما از آن آدم‌هایی‌ست که بعداً چیزها را یادآوری می‌کند.","options":[{"id":"A","need":"freedom","text":"ردش کن. ترجیح می‌دهی بیشتر صبر کنی تا این‌که آن قرض روی سرت سنگینی کند."},{"id":"B","need":"survival","text":"قبولش کن. سال‌ها زودتر از بازار اجاره بیرون آمدن ارزش کمی معذب‌بودن را دارد."},{"id":"C","need":"belonging","text":"قبولش کن، و آن را کاری بدان که خانواده‌ها برای هم انجام می‌دهند."},{"id":"D","need":"power","text":"آن را به‌عنوان وامی رسمی با برنامه بازپرداخت مکتوب قبول کن، تا روی کاغذ مال خودت باشد."}]},{"id":"SU1","contrast":["survival","fun"],"scenario":"چهار روز مرخصی داری و به‌اندازه یکی از این دو کار پول داری: یک دوره آموزشی در چیزی که سال‌ها به آن کنجکاو بوده‌ای اما هرگز از آن درآمدی نخواهی داشت، یا افزودن پول به حسابی که هنگام خراب‌شدن چیزی از آن برمی‌داری.","options":[{"id":"A","need":"fun","text":"دوره را بگذران. سال‌هاست دور این موضوع می‌چرخی و چهار روز آزاد به‌ندرت پیش می‌آید."},{"id":"B","need":"survival","text":"پول را به حساب اضافه کن. آخرین باری که چیزی خراب شد، ماه‌ها اثرش را حس کردی."},{"id":"C","need":"belonging","text":"این چهار روز را با آدم‌هایی بگذران که مدتی‌ست درست ندیده‌ای‌شان."},{"id":"D","need":"power","text":"آن را برای مدرکی خرج کن که واقعاً در کارت جایگاهت را بالا می‌برد."}]},{"id":"SU2","contrast":["survival","fun"],"scenario":"یک دوست یک جای خالی در سفری دارد که نه روز دیگر حرکت می‌کند، به جایی که همیشه می‌خواستی بروی. قبول کردن یعنی استفاده از مرخصی‌ای که برای مواقع اضطراری بعداً در سال کنار گذاشته بودی.","options":[{"id":"A","need":"survival","text":"مرخصی را نگه دار. برای دلیلی کنارش گذاشته بودی و سال هنوز تمام نشده."},{"id":"B","need":"fun","text":"برو. اتفاقات خوب دقیقاً همین‌طور با نُه روز اطلاع قبلی می‌افتند."},{"id":"C","need":"belonging","text":"برو، بیشتر به این خاطر که نُه روز کنار همان دوست خاص خواهی بود."},{"id":"D","need":"freedom","text":"برو، و وقتی بقیه گروه برگشتند، یک هفته بیشتر تنهایی آن‌جا بمان."}]},{"id":"SU3","contrast":["survival","fun"],"scenario":"ماشینت قدیمی است اما کار می‌کند. یا می‌توانی یک سرویس کامل بدهی که سه سال دیگر آن را نگه دارد، یا آن چیزی را بخری که از بهار برایش یک تب باز نگه داشته‌ای.","options":[{"id":"A","need":"fun","text":"آن چیز را بخر. ماشین خوب کار می‌کند و از بهار همین را می‌خواستی."},{"id":"B","need":"survival","text":"ماشین را سرویس کن. اگر خوب کار می‌کند به این خاطر است که مراقبتش کرده‌ای."},{"id":"C","need":"power","text":"هیچ‌کدام را نکن و پول را برای کاری بگذار که مدت‌هاست به دیگران می‌گویی انجامش می‌دهی."},{"id":"D","need":"freedom","text":"سرویسش کن — ماشینی که ممکن است وسط راه بمانی، ماشینی‌ست که هفته‌ات را به‌جای تو تصمیم می‌گیرد."}]},{"id":"SP1","contrast":["survival","power"],"scenario":"مدیرت پیشنهاد می‌دهد رهبری پروژه‌ای با دیده‌شدن واقعی را بر عهده بگیری. از آن پروژه‌هایی‌ست که آدم‌ها با آن ترفیع می‌گیرند. اما منابع کافی ندارد، زمان‌بندی‌اش به نظرت اشتباه است، و اگر شکست بخورد، شکستش علنی خواهد بود و نامت رویش است.","options":[{"id":"A","need":"power","text":"قبولش کن. کاری با این‌قدر دیده‌شدن زیاد پیش نمی‌آید، و ترجیح می‌دهی خودت مسئولش باشی."},{"id":"B","need":"survival","text":"مؤدبانه ردش کن. یک شکست علنی بیشتر از یک سال آرام برایت هزینه دارد."},{"id":"C","need":"freedom","text":"فقط در صورتی قبولش کن که خودت زمان‌بندی و افراد را انتخاب کنی."},{"id":"D","need":"belonging","text":"بخواه آن را مشترکاً با کسی که به او اعتماد داری رهبری کنی، تا هیچ‌کدام تنها بار آن را به دوش نکشید."}]},{"id":"SP2","contrast":["survival","power"],"scenario":"شش سال است بی‌سروصدا در کارت خوب بوده‌ای. یک رقیب عنوانی را که مدت‌ها می‌خواستی به تو پیشنهاد می‌دهد، در شرکتی که دو دور اخراج داشته و ممکن است تا سه سال دیگر وجود نداشته باشد.","options":[{"id":"A","need":"survival","text":"همان‌جا که هستی بمان. عنوانی در شرکتی که ممکن است تعطیل شود ارزش زیادی ندارد."},{"id":"B","need":"power","text":"قبولش کن. شش سال آرامش کافی بوده، و آن عنوان همان چیزی‌ست که منتظرش بودی."},{"id":"C","need":"fun","text":"قبولش کن چون خودِ کار جالب‌تر از کاری‌ست که الان انجام می‌دهی به نظر می‌رسد."},{"id":"D","need":"freedom","text":"از این پیشنهاد استفاده کن تا مشاور مستقل شوی، جایی که اصلاً کسی عنوان نمی‌دهد."}]},{"id":"SP3","contrast":["survival","power"],"scenario":"قراردادی که رویش حساب می‌کنی موعد تمدیدش رسیده. مشتری اشاره می‌کند که با نرخ پایین‌تری تمدید می‌کند. می‌دانی کارت بیشتر از چیزی‌ست که پیشنهاد می‌دهند ارزش دارد، و می‌دانی که او باثبات‌ترین درآمدت است.","options":[{"id":"A","need":"power","text":"روی نرخت بایست و بگذار خودشان تصمیم بگیرند. پذیرفتن کمتر پیامی می‌دهد که نمی‌خواهی داده شود."},{"id":"B","need":"survival","text":"نرخ پایین‌تر را بپذیر. کار باثبات بیشتر از حق‌به‌جانب بودن درباره قیمتت ارزش دارد."},{"id":"C","need":"belonging","text":"اول درست باهاشان صحبت کن — مدت زیادی‌ست با هم کار کرده‌اید و این باید اهمیت داشته باشد."},{"id":"D","need":"freedom","text":"بگذار برود و از این فرصت برای گرفتن کاری که واقعاً خودت انتخاب کرده‌ای استفاده کن."}]}],"params":{"beta":2.335598377592894,"alpha":{"survival":0.0,"belonging":0.1734449967959889,"power":-0.1756099320435233,"freedom":0.10062638444847634,"fun":0.0002757524359122867}},"contrastHeuristics":{"survival|belonging":"پیش از کمک به دیگران، ابتدا جای پای خودش را محکم می‌کند","belonging|survival":"ترجیح می‌دهد هزینه شخصی بپردازد تا کسی را ناامید نکند","survival|power":"گزینه باثبات را به گزینه پرنمود ترجیح می‌دهد","power|survival":"برای کاری که نامش پای آن است، ریسک واقعی را می‌پذیرد","survival|freedom":"فضای مانور را با دانستن جایگاه دقیق خود معامله می‌کند","freedom|survival":"برای باز نگه‌داشتن گزینه‌هایش، حاضر است هزینه یا امنیت بیشتری بپردازد","survival|fun":"پیش از خرج‌کردن برای کنجکاوی، ابتدا زمین را محکم می‌کند","fun|survival":"ذخیره‌اش را برای چیزی جذاب خرج می‌کند به‌جای این‌که رویش بنشیند","belonging|power":"اعتبار کار را رها می‌کند تا رابطه کاری‌اش تحت فشار قرار نگیرد","power|belonging":"می‌خواهد سهم مشخص خودش دیده شود، حتی به قیمت هزینه اجتماعی","belonging|freedom":"حتی وقتی تعهدات ثابت به دیگران آزارش می‌دهد، به آن‌ها پایبند می‌ماند","freedom|belonging":"حتی اگر باعث ناامیدی کسی نزدیک شود، وقت خودش را حفظ می‌کند","belonging|fun":"همراهی آشنا را به تجربه‌ای تازه ترجیح می‌دهد","fun|belonging":"به‌دنبال چیزی جذاب می‌رود حتی اگر از آدم‌های آشنا دور شود","power|freedom":"اگر تأثیرگذاری واقعی به‌دست بیاورد، فرآیند شخص دیگری را می‌پذیرد","freedom|power":"اختیاراتی را که همراه با برنامه زمانی شخص دیگری می‌آید رد می‌کند","power|fun":"کنجکاوی‌اش را به سمت چیزهایی هدایت می‌کند که سابقه‌ای قابل‌مشاهده می‌سازند","fun|power":"به‌دنبال چیز جذاب می‌رود حتی اگر یعنی از صفر شروع کند","freedom|fun":"حتی در برابر تعهدات لذت‌بخش، از زمان بی‌برنامه‌اش محافظت می‌کند","fun|freedom":"وقتی موضوع به‌اندازه کافی جذاب باشد، به یک تعهد ثابت تن می‌دهد"},"controlHeuristics":[{"lo":-1.01,"hi":-0.45,"text":"انتظار دارد وقتی دیگران توصیه‌اش را بپذیرند، اوضاع بهتر شود"},{"lo":-0.45,"hi":-0.15,"text":"معمولاً مشکل را در کاری که طرف مقابل انجام داده می‌بیند"},{"lo":0.15,"hi":0.45,"text":"پیش از مقصر دانستن دیگران، به سهم خودش نگاه می‌کند"},{"lo":0.45,"hi":1.01,"text":"وقتی چیزی اشتباه پیش می‌رود، از تغییری که خودش می‌تواند ایجاد کند شروع می‌کند"}],"needLabel":{"survival":"بقا","belonging":"عشق و تعلق","power":"قدرت","freedom":"آزادی","fun":"تفریح"},"likertLabel":{"1":"کاملاً مخالفم","2":"مخالفم","3":"نظری ندارم","4":"موافقم","5":"کاملاً موافقم"},"freeTextPrompts":["لحظه‌ای از سال گذشته را توصیف کنید که دوست داشتید دوباره آن را زندگی کنید.","موقعیتی را توصیف کنید که در آن بیشتر از هر زمان دیگری احساس کردید خودِ واقعی‌تان هستید."]};
 
 const NEEDS = ["survival", "belonging", "power", "freedom", "fun"];
-const NEED_LABEL = {
-  survival: "Survival", belonging: "Love & Belonging", power: "Power",
-  freedom: "Freedom", fun: "Fun"
-};
+const NEED_LABEL = DATA.needLabel;
 const LIKERT = [1, 2, 3, 4, 5];
-const LIKERT_LABEL = { 1: "Strongly disagree", 2: "Disagree", 3: "Neither", 4: "Agree", 5: "Strongly agree" };
+const LIKERT_LABEL = DATA.likertLabel;
 
 /* =========================================================================
-   needs/scoring.py port — deterministic, ipsative Likert -> need profile.
+   پورت needs/scoring.py — نمره‌دهی قطعی و نسبی (ایپساتیو) از پاسخ‌های لیکرت
+   به بردار نیاز.
    ========================================================================= */
 function scoreQuestionnaire(responses) {
   const NEUTRAL = 3.0;
@@ -249,7 +250,7 @@ function scoreQuestionnaire(responses) {
 }
 
 /* =========================================================================
-   profile/derive.py port — rule-based heuristic selection, no model.
+   پورت profile/derive.py — انتخاب قانون‌محور جملات توصیفی، بدون مدل.
    ========================================================================= */
 const GAP_THRESHOLD = 0.25;
 const MAX_HEURISTICS = 3;
@@ -277,7 +278,7 @@ function dominantSecondary(strengths) {
 }
 
 /* =========================================================================
-   predict/contest.py port — logistic need-contest softmax model.
+   پورت predict/contest.py — مدل رقابت نیازها با سافت‌مکس لجستیک.
    ========================================================================= */
 const PARAMS = {
   beta: DATA.params.beta,
@@ -317,15 +318,17 @@ function contestedNeeds(puzzle, strengths) {
 }
 
 /* =========================================================================
-   predict/templates.py port — reasoning built from the real coefficients.
+   پورت predict/templates.py — استدلال ساخته‌شده از ضرایب واقعی مدل.
    ========================================================================= */
 function phraseScore(value) {
   const m = Math.abs(value);
-  if (m < 0.1) return "right at your own average";
-  if (m < 0.3) return value > 0 ? "slightly above your average" : "slightly below your average";
-  if (m < 0.6) return value > 0 ? "well above your average" : "well below your average";
-  return value > 0 ? "at the top of your ordering" : "at the bottom of your ordering";
+  if (m < 0.1) return "دقیقاً هم‌سطح میانگین خودت";
+  if (m < 0.3) return value > 0 ? "کمی بالاتر از میانگین خودت" : "کمی پایین‌تر از میانگین خودت";
+  if (m < 0.6) return value > 0 ? "به‌وضوح بالاتر از میانگین خودت" : "به‌وضوح پایین‌تر از میانگین خودت";
+  return value > 0 ? "در بالای رتبه‌بندی نیازهایت" : "در پایین رتبه‌بندی نیازهایت";
 }
+
+function bdi(s) { return `<bdi>${s}</bdi>`; }
 
 function explain(strengths, puzzle, prediction, params) {
   const [high, low] = contestedNeeds(puzzle, strengths);
@@ -333,30 +336,30 @@ function explain(strengths, puzzle, prediction, params) {
   const steps = [];
 
   if (Math.abs(hi - lo) < 0.05) {
-    steps.push(`Your answers put ${NEED_LABEL[high]} and ${NEED_LABEL[low]} at almost the same level (${fmtSigned(hi)} against ${fmtSigned(lo)} on your own scale), so there is not much in this one.`);
+    steps.push(`پاسخ‌هایت «${NEED_LABEL[high]}» و «${NEED_LABEL[low]}» را تقریباً هم‌سطح گذاشته‌اند (${bdi(fmtSigned(hi))} در برابر ${bdi(fmtSigned(lo))} روی مقیاس خودت)، پس چیز زیادی در این پازل مشخص نمی‌شود.`);
   } else {
-    steps.push(`Your answers put ${NEED_LABEL[high]} ${phraseScore(hi)} (${fmtSigned(hi)}) and ${NEED_LABEL[low]} ${phraseScore(lo)} (${fmtSigned(lo)}), measured against your own average rather than anyone else's.`);
+    steps.push(`پاسخ‌هایت «${NEED_LABEL[high]}» را ${phraseScore(hi)} (${bdi(fmtSigned(hi))}) گذاشته‌اند و «${NEED_LABEL[low]}» را ${phraseScore(lo)} (${bdi(fmtSigned(lo))}) — این مقایسه نسبت به میانگین خودت است، نه در مقایسه با دیگران.`);
   }
 
   const hiOpt = puzzle.options.find(o => o.need === high);
   const loOpt = puzzle.options.find(o => o.need === low);
-  steps.push(`This scenario sets those two against each other: option ${hiOpt.id} is the ${NEED_LABEL[high].toLowerCase()} answer, option ${loOpt.id} is the ${NEED_LABEL[low].toLowerCase()} one.`);
+  steps.push(`این سناریو این دو را روبه‌روی هم می‌گذارد: گزینه ${bdi(hiOpt.id)} پاسخِ «${NEED_LABEL[high]}» است، گزینه ${bdi(loOpt.id)} پاسخِ «${NEED_LABEL[low]}».`);
 
   const authoredSet = new Set(puzzle.contrast);
   if (!(authoredSet.has(high) && authoredSet.has(low) && puzzle.contrast.length === 2 && authoredSet.size === 2)) {
-    const authored = [...puzzle.contrast].map(n => NEED_LABEL[n]).sort().join(" and ");
-    steps.push(`It was written to test ${authored}, but given your ordering the real contest here is ${NEED_LABEL[high]} against ${NEED_LABEL[low]}.`);
+    const authored = [...puzzle.contrast].map(n => NEED_LABEL[n]).sort().join(" و ");
+    steps.push(`این پازل برای سنجش «${authored}» نوشته شده بود، اما با توجه به چینش نیازهای تو، رقابت واقعی اینجا بین «${NEED_LABEL[high]}» و «${NEED_LABEL[low]}» است.`);
   }
 
   const top = prediction.probabilities[prediction.predictedOptionId];
   const runner = prediction.probabilities[prediction.runnerUpId];
-  steps.push(`Weighting need strength by how strongly it drove choices in the data (beta = ${params.beta.toFixed(2)}), that comes out at ${pct(top)} for ${prediction.predictedOptionId} against ${pct(runner)} for ${prediction.runnerUpId}.`);
+  steps.push(`با وزن‌دهی به قدرت نیاز بر اساس میزان تأثیرش در داده‌ها (بتا = ${bdi(params.beta.toFixed(2))})، نتیجه می‌شود ${bdi(pct(top))} برای ${bdi(prediction.predictedOptionId)} در برابر ${bdi(pct(runner))} برای ${bdi(prediction.runnerUpId)}.`);
 
   const margin = prediction.confidence - runner;
   if (margin < 0.12) {
-    steps.push(`So my guess is ${prediction.predictedOptionId} — but the gap is ${pct(margin)}, which is close enough that ${prediction.runnerUpId} would not surprise me.`);
+    steps.push(`پس حدسم ${bdi(prediction.predictedOptionId)} است — اما فاصله فقط ${bdi(pct(margin))} است، آن‌قدر کم که اگر ${bdi(prediction.runnerUpId)} را انتخاب کنی هم تعجب نمی‌کنم.`);
   } else {
-    steps.push(`So my guess is ${prediction.predictedOptionId}.`);
+    steps.push(`پس حدسم ${bdi(prediction.predictedOptionId)} است.`);
   }
   return steps;
 }
@@ -365,7 +368,7 @@ function fmtSigned(v) { return (v >= 0 ? "+" : "") + v.toFixed(2); }
 function pct(v) { return Math.round(v * 100) + "%"; }
 
 /* =========================================================================
-   update/belief.py port — Laplace-approximate belief update.
+   پورت update/belief.py — به‌روزرسانی باور با تقریب لاپلاس.
    ========================================================================= */
 function logLikelihood(s, puzzle, chosenId, params) {
   const idx = puzzleNeedIndices(puzzle);
@@ -378,9 +381,9 @@ function logLikelihood(s, puzzle, chosenId, params) {
 }
 
 function gradientAscentUpdate(mean, variance, puzzle, chosenId, params, steps = 200, lr = 0.08) {
-  // Small gradient-ascent MAP solve (finite-difference gradient) — five
-  // parameters, a couple hundred cheap steps is instant in a browser and
-  // avoids pulling in a numerical optimisation library for one call site.
+  // حل تقریبی MAP با گرادیان صعودی (گرادیان تفاضل محدود) — فقط پنج پارامتر،
+  // چند صد گام ارزان در مرورگر آنی است و نیازی به کتابخانه بهینه‌سازی عددی
+  // فقط برای یک نقطه فراخوانی نیست.
   let s = mean.slice();
   const eps = 1e-4;
   const objective = (x) => {
@@ -421,7 +424,7 @@ function beliefFromProfile(strengths, confidence) {
 }
 
 /* =========================================================================
-   puzzles/select.py port — active-learning-ish next-puzzle choice.
+   پورت puzzles/select.py — انتخاب پازل بعدی به‌شیوه یادگیری فعال.
    ========================================================================= */
 function entropy(probs) {
   return -probs.reduce((a, p) => a + Math.max(p, 1e-12) * Math.log(Math.max(p, 1e-12)), 0);
@@ -452,9 +455,9 @@ function nextPuzzle(belief, seenIds, params) {
 }
 
 /* =========================================================================
-   App state and rendering
+   وضعیت برنامه و رندر
    ========================================================================= */
-let session = null; // { strengths, confidence, controlOrientation, belief, seen:Set, hits, played }
+let session = null;
 
 function showTab(name) {
   document.getElementById("view-test").style.display = name === "test" ? "" : "none";
@@ -467,33 +470,33 @@ function renderTest() {
   const el = document.getElementById("view-test");
   const rows = DATA.items.map((item, n) => `
     <div class="q" data-item="${item.id}">
-      <div class="progress">${n + 1} / ${DATA.items.length}</div>
+      <div class="progress">${bdi((n + 1) + " / " + DATA.items.length)}</div>
       <div class="qtext">${escapeHtml(item.text)}</div>
       <div class="likert">
         ${LIKERT.map(v => `
           <label>
             <input type="radio" name="q_${item.id}" value="${v}">
-            <span>${v} — ${LIKERT_LABEL[v]}</span>
+            <span>${bdi(v)} — ${LIKERT_LABEL[v]}</span>
           </label>`).join("")}
       </div>
     </div>`).join("");
 
-  const freeText = DATA.items.length ? `
+  const freeText = `
     <div class="q">
-      <div class="qtext">Describe a moment from the past year you would choose to live again.</div>
-      <textarea id="ft1" placeholder="optional"></textarea>
+      <div class="qtext">${escapeHtml(DATA.freeTextPrompts[0])}</div>
+      <textarea id="ft1" placeholder="اختیاری"></textarea>
     </div>
     <div class="q">
-      <div class="qtext">Describe a situation in which you felt most like yourself.</div>
-      <textarea id="ft2" placeholder="optional"></textarea>
-    </div>` : "";
+      <div class="qtext">${escapeHtml(DATA.freeTextPrompts[1])}</div>
+      <textarea id="ft2" placeholder="اختیاری"></textarea>
+    </div>`;
 
   el.innerHTML = `
     <div class="panel">
-      <p class="note">Answer every item on a 1–5 scale. Scoring is deterministic and ipsative: it measures your needs relative to your own average, not against other people — so answering everything the same way produces a flat profile, on purpose.</p>
+      <p class="note">به هر گویه در مقیاس ۱ تا ۵ پاسخ بده. نمره‌دهی قطعی و نسبی است: نیازهایت را نسبت به میانگین خودت می‌سنجد، نه در مقایسه با دیگران — به همین دلیل، پاسخ‌دادن یکسان به همه گویه‌ها یک پروفایل کاملاً صاف تولید می‌کند، از عمد.</p>
       ${rows}
       ${freeText}
-      <button class="primary" id="submitBtn" onclick="submitQuestionnaire()" disabled>See my profile</button>
+      <button class="primary" id="submitBtn" onclick="submitQuestionnaire()" disabled>دیدن پروفایل من</button>
       <div id="testError" style="color:var(--bad);font-size:0.85rem;margin-top:8px;"></div>
     </div>
     <div id="profileCard"></div>
@@ -511,7 +514,7 @@ function submitQuestionnaire() {
   const responses = {};
   for (const item of DATA.items) {
     const checked = document.querySelector(`input[name="q_${item.id}"]:checked`);
-    if (!checked) { document.getElementById("testError").textContent = "Please answer every item."; return; }
+    if (!checked) { document.getElementById("testError").textContent = "لطفاً به همه گویه‌ها پاسخ بده."; return; }
     responses[item.id] = parseInt(checked.value, 10);
   }
   const profile = scoreQuestionnaire(responses);
@@ -546,28 +549,28 @@ function renderProfileCard(strengths, confidence, controlOrientation) {
       <div class="bar-row">
         <div class="bar-label">${NEED_LABEL[need]}</div>
         <div class="bar-track"><div class="bar-mid"></div><div class="bar-fill" style="${fillStyle}"></div></div>
-        <div class="bar-val">${fmtSigned(v)}</div>
+        <div class="bar-val">${bdi(fmtSigned(v))}</div>
       </div>
-      <div class="conf">confidence ${pct(confidence[i])}</div>`;
+      <div class="conf">اطمینان: ${bdi(pct(confidence[i]))}</div>`;
   }).join("");
 
   const heuristics = deriveHeuristics({ strengths, controlOrientation });
   const heuristicsHtml = heuristics.length
     ? `<ul class="heuristics">${heuristics.map(h => `<li>${escapeHtml(h)}</li>`).join("")}</ul>`
-    : `<p style="color:var(--ink-faint);font-size:0.9rem;">Your needs came out close together, so no single pattern stands out.</p>`;
+    : `<p style="color:var(--ink-faint);font-size:0.9rem;">نیازهایت به هم نزدیک درآمده‌اند، پس الگوی مشخصی برجسته نیست.</p>`;
 
-  const orientationWord = controlOrientation > 0 ? "internal control" : "external control";
+  const orientationWord = controlOrientation > 0 ? "کنترل درونی" : "کنترل بیرونی";
 
   document.getElementById("profileCard").innerHTML = `
     <div class="panel">
-      <h3 style="margin-top:0;">Your profile</h3>
-      <p style="font-size:0.85rem;color:var(--ink-soft);">Relative need strength, measured against your own average — not other people's.</p>
+      <h3 style="margin-top:0;">پروفایل تو</h3>
+      <p style="font-size:0.85rem;color:var(--ink-soft);">قدرت نسبی نیازها، نسبت به میانگین خودت — نه در مقایسه با دیگران.</p>
       ${bars}
-      <p style="font-size:0.88rem;margin-top:14px;">Control orientation: <b>${fmtSigned(controlOrientation)}</b> — leaning toward ${orientationWord}.</p>
-      ${dominant ? `<p style="font-size:0.88rem;">Dominant: <b>${NEED_LABEL[dominant]}</b> &nbsp;·&nbsp; Secondary: <b>${NEED_LABEL[secondary]}</b></p>` : ""}
-      <h4 style="margin-bottom:6px;">What that predicts about how you decide</h4>
+      <p style="font-size:0.88rem;margin-top:14px;">جهت‌گیری کنترل: <b>${bdi(fmtSigned(controlOrientation))}</b> — گرایش به سمت ${orientationWord}.</p>
+      ${dominant ? `<p style="font-size:0.88rem;">نیاز غالب: <b>${NEED_LABEL[dominant]}</b> &nbsp;·&nbsp; نیاز دوم: <b>${NEED_LABEL[secondary]}</b></p>` : ""}
+      <h4 style="margin-bottom:6px;">این چه چیزی درباره روش تصمیم‌گیری‌ات پیش‌بینی می‌کند</h4>
       ${heuristicsHtml}
-      <p class="note" style="margin-top:16px;">Head to the <b>Play</b> tab — puzzles are chosen to test the contrasts your profile is least certain about.</p>
+      <p class="note" style="margin-top:16px;">حالا به تب <b>بازی</b> برو — پازل‌ها طوری انتخاب می‌شوند که تناقض‌هایی را بسنجند که پروفایلت درباره‌شان کمترین اطمینان را دارد.</p>
     </div>
   `;
 }
@@ -575,7 +578,7 @@ function renderProfileCard(strengths, confidence, controlOrientation) {
 function renderPlay() {
   const el = document.getElementById("view-play");
   if (!session) {
-    el.innerHTML = `<div class="panel locked">Complete the Test tab first — puzzles are matched to your profile.</div>`;
+    el.innerHTML = `<div class="panel locked">اول تب آزمون را کامل کن — پازل‌ها بر اساس پروفایل تو انتخاب می‌شوند.</div>`;
     return;
   }
   if (!session.currentPuzzle && !session.answered) {
@@ -583,10 +586,10 @@ function renderPlay() {
     if (!puzzle) { renderSummary(); return; }
     session.seen.add(puzzle.id);
     session.currentPuzzle = puzzle;
-    // Predict and fix the reasoning BEFORE the puzzle is shown to the user —
-    // this ordering is the entire point of the sealed-prediction design.
-    // (See the note at the top of this file on why this can't be
-    // cryptographically enforced client-side the way the CLI's hashed log is.)
+    // پیش‌بینی و ثبت استدلال پیش از نمایش پازل — همین ترتیب، کل معنای
+    // طراحیِ «پیش‌بینی مهروموم‌شده» است.
+    // (توضیح بالای این فایل را ببین: چرا این کار در سمت مرورگر نمی‌تواند
+    // مثل لاگ هش‌شده در CLI، به‌صورت رمزنگارانه غیرقابل‌دستکاری باشد.)
     const workingStrengths = session.belief.mean;
     session.lastPrediction = predict(workingStrengths, puzzle, PARAMS);
     session.lastSteps = explain(workingStrengths, puzzle, session.lastPrediction, PARAMS);
@@ -599,37 +602,37 @@ function renderPlay() {
 
   const optionsHtml = puzzle.options.map(o => `
     <button class="option" data-oid="${o.id}" onclick="answerPuzzle('${o.id}')" ${session.answered ? "disabled" : ""}>
-      <span class="oid">${o.id}.</span>${escapeHtml(o.text)}
+      <span class="oid">${bdi(o.id + ".")}</span>${escapeHtml(o.text)}
     </button>`).join("");
 
   let revealHtml = "";
   if (session.answered) {
     const hit = prediction.predictedOptionId === session.lastChoice;
-    const stepsHtml = session.lastSteps.map(s => `<li>${escapeHtml(s)}</li>`).join("");
+    const stepsHtml = session.lastSteps.map(s => `<li>${s}</li>`).join("");
     let missNote = "";
     if (!hit) {
       const actualOpt = puzzle.options.find(o => o.id === session.lastChoice);
-      missNote = `<p style="font-size:0.88rem;color:var(--ink-soft);">You went for the ${NEED_LABEL[actualOpt.need]} answer instead, which I had at ${pct(prediction.probabilities[session.lastChoice])}. That moves ${NEED_LABEL[actualOpt.need]} up in your profile.</p>`;
+      missNote = `<p style="font-size:0.88rem;color:var(--ink-soft);">تو گزینه‌ی «${NEED_LABEL[actualOpt.need]}» را انتخاب کردی، که احتمالش را ${bdi(pct(prediction.probabilities[session.lastChoice]))} گذاشته بودم. این انتخاب، «${NEED_LABEL[actualOpt.need]}» را در پروفایلت بالاتر می‌برد.</p>`;
     }
     revealHtml = `
       <div class="reveal">
         <div class="verdict ${hit ? "hit" : "miss"}">
-          You chose ${session.lastChoice}. I had guessed ${prediction.predictedOptionId} at ${pct(prediction.confidence)} confidence — ${hit ? "hit" : "miss"}.
+          تو ${bdi(session.lastChoice)} را انتخاب کردی. من ${bdi(prediction.predictedOptionId)} را با ${bdi(pct(prediction.confidence))} اطمینان حدس زده بودم — ${hit ? "درست" : "نادرست"}.
         </div>
         <ol>${stepsHtml}</ol>
         ${missNote}
-        <button class="primary" onclick="advancePuzzle()">Next puzzle →</button>
+        <button class="primary" onclick="advancePuzzle()">پازل بعدی ←</button>
       </div>`;
   }
 
   el.innerHTML = `
     <div class="panel">
-      <p class="note">The guess above was computed and locked in the instant this puzzle appeared — before any option could be clicked. Note: a browser page can't make that tamper-evident the way the CLI's hashed log does; this preserves the ordering, not a cryptographic guarantee.</p>
-      <div style="font-size:0.8rem;color:var(--ink-faint);margin-bottom:10px;">Puzzle ${session.played + 1} / ${total}</div>
+      <p class="note">حدس بالا همان لحظه‌ای که این پازل ظاهر شد محاسبه و قفل شد — پیش از این‌که بتوانی روی گزینه‌ای کلیک کنی. توجه: یک صفحه‌ی مرورگری نمی‌تواند این را مثل لاگ هش‌شده در CLI، رمزنگارانه غیرقابل‌دستکاری کند؛ فقط همین ترتیبِ زمانی را حفظ می‌کند، نه یک تضمین رمزنگارانه.</p>
+      <div style="font-size:0.8rem;color:var(--ink-faint);margin-bottom:10px;">پازل ${bdi((session.played + 1) + " / " + total)}</div>
       <div class="scenario">${escapeHtml(puzzle.scenario)}</div>
       ${optionsHtml}
       ${revealHtml}
-      <div class="running">Running: ${session.hits}/${session.played} correct${session.played ? ` (chance on 4 options ≈ 25%)` : ""}.</div>
+      <div class="running">تا اینجا: ${bdi(session.hits + " از " + session.played)} درست${session.played ? ` (شانس تصادفی روی ۴ گزینه ≈ ۲۵٪)` : ""}.</div>
     </div>
   `;
 
@@ -663,19 +666,19 @@ function renderSummary() {
   const rows = NEEDS.map((n, i) => {
     const b = before[i], a = after[i];
     const arrow = Math.abs(a - b) < 0.01 ? "" : (a > b ? "↑" : "↓");
-    return `<tr><td>${NEED_LABEL[n]}</td><td>${fmtSigned(b)}</td><td>${fmtSigned(a)} ${arrow}</td></tr>`;
+    return `<tr><td>${NEED_LABEL[n]}</td><td>${bdi(fmtSigned(b))}</td><td>${bdi(fmtSigned(a) + " " + arrow)}</td></tr>`;
   }).join("");
 
   document.getElementById("view-play").innerHTML = `
     <div class="panel">
-      <h3 style="margin-top:0;">Summary</h3>
-      <p>I called ${session.hits} of ${session.played} correctly (${pct(session.hits / session.played)}). Guessing at random on four options would be about 25%.</p>
-      <h4>How your profile moved as you played</h4>
+      <h3 style="margin-top:0;">جمع‌بندی</h3>
+      <p>از ${bdi(session.played)} پازل، ${bdi(session.hits)} مورد را درست حدس زدم (${bdi(pct(session.hits / session.played))}). حدس تصادفی روی چهار گزینه چیزی حدود ۲۵٪ درستی دارد.</p>
+      <h4>پروفایلت هنگام بازی چگونه تغییر کرد</h4>
       <table class="summary-table">
-        <tr><td></td><td>before</td><td>after</td></tr>
+        <tr><td></td><td>قبل</td><td>بعد</td></tr>
         ${rows}
       </table>
-      <button class="ghost" style="margin-top:16px;" onclick="restartPlay()">Play again with a new puzzle set</button>
+      <button class="ghost" style="margin-top:16px;" onclick="restartPlay()">دوباره با مجموعه‌ای تازه از پازل‌ها بازی کن</button>
     </div>
   `;
 }
