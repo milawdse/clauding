@@ -1,0 +1,36 @@
+- id: SP1
+  contrast: [survival, power]
+  scenario: >
+    Your manager offers you the lead on a project with real visibility. It is
+    the kind of thing people get promoted off. It is also badly resourced, on a
+    timetable you think is wrong, and if it fails it will fail publicly with your
+    name on it.
+  options:
+    - {id: A, need: power,     text: "Take it. Work this visible does not come round often, and you would rather be the one holding it."}
+    - {id: B, need: survival,  text: "Decline politely. A public failure would cost you more than a quiet year would."}
+    - {id: C, need: freedom,   text: "Take it only if you get to set the timetable and pick the people yourself."}
+    - {id: D, need: belonging, text: "Ask to lead it jointly with someone you trust, so neither of you carries it alone."}
+
+- id: SP2
+  contrast: [survival, power]
+  scenario: >
+    You have been quietly good at your job for six years. A competitor offers you
+    a title you have wanted for a long time, at a company that has had two rounds
+    of layoffs and might not exist in three years.
+  options:
+    - {id: A, need: survival,  text: "Stay where you are. A title on a company that folds is not worth much."}
+    - {id: B, need: power,     text: "Take it. Six quiet years is long enough, and the title is the thing you have been waiting for."}
+    - {id: C, need: fun,       text: "Take it because the work itself sounds more interesting than what you do now."}
+    - {id: D, need: freedom,   text: "Use the offer to go consulting, where nobody hands out the titles anyway."}
+
+- id: SP3
+  contrast: [survival, power]
+  scenario: >
+    A contract you rely on comes up for renewal. The client hints they will renew
+    at a lower rate. You know your work is worth more than they are offering, and
+    you also know they are your steadiest income.
+  options:
+    - {id: A, need: power,     text: "Hold your rate and let them decide. Accepting less would say something you do not want said."}
+    - {id: B, need: survival,  text: "Accept the lower rate. Steady work is worth more than being right about your price."}
+    - {id: C, need: belonging, text: "Talk to them properly first — you have worked together a long time and that ought to count."}
+    - {id: D, need: freedom,   text: "Let it go and use the gap to take on work you actually chose."}

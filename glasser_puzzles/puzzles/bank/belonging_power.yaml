@@ -1,0 +1,35 @@
+- id: BP1
+  contrast: [belonging, power]
+  scenario: >
+    A piece of work you largely did is being presented next week. Your colleague,
+    who did the smaller half, has been asked to present it and is visibly pleased.
+    Correcting the record is possible but would take something away from them.
+  options:
+    - {id: A, need: power,     text: "Make sure the room knows which parts were yours. The work was yours and that should be on the record."}
+    - {id: B, need: belonging, text: "Leave it. They are pleased, you work with them every day, and that is worth more than the credit."}
+    - {id: C, need: freedom,   text: "Say nothing and quietly stop putting your best work into things you do not control."}
+    - {id: D, need: fun,       text: "Let it go and put your energy into the next thing, which is more interesting anyway."}
+
+- id: BP2
+  contrast: [belonging, power]
+  scenario: >
+    You are up for something you want. So is a close friend, and only one of you
+    can have it. They do not know you applied. You could mention it now, or wait
+    and let the decision arrive on its own.
+  options:
+    - {id: A, need: belonging, text: "Tell them today, before they hear it from anyone else."}
+    - {id: B, need: power,     text: "Say nothing and compete properly. You both applied; that is what applying means."}
+    - {id: C, need: freedom,   text: "Withdraw. You would rather not have the thing than have it on these terms."}
+    - {id: D, need: fun,       text: "Tell them, and treat the whole thing as something to laugh about whichever way it lands."}
+
+- id: BP3
+  contrast: [belonging, power]
+  scenario: >
+    Your team is stuck. You can see the answer and you are fairly sure you are
+    right. Saying so plainly would end the discussion an hour early and would
+    also make two people look like they had been going the wrong way.
+  options:
+    - {id: A, need: power,     text: "Say it plainly. Being right an hour earlier is worth more than an hour of everyone's comfort."}
+    - {id: B, need: belonging, text: "Ask questions that get them there themselves, even if it takes the whole hour."}
+    - {id: C, need: survival,  text: "Put it in writing afterwards, so it is on record without a confrontation in the room."}
+    - {id: D, need: freedom,   text: "Say your piece once, then let the room do whatever it decides to do."}

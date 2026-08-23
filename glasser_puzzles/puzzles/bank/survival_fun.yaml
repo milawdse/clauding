@@ -1,0 +1,35 @@
+- id: SU1
+  contrast: [survival, fun]
+  scenario: >
+    You have four days off and enough money for one of two things: a course in
+    something you have been curious about for years but will never earn from, or
+    topping up the account you dip into when something breaks.
+  options:
+    - {id: A, need: fun,       text: "Do the course. You have been circling this for years and four free days rarely line up."}
+    - {id: B, need: survival,  text: "Top up the account. The last time something broke you felt it for months."}
+    - {id: C, need: belonging, text: "Spend the four days with people you have not properly seen in a while."}
+    - {id: D, need: power,     text: "Spend it on the certification that would actually move you up at work."}
+
+- id: SU2
+  contrast: [survival, fun]
+  scenario: >
+    A friend has a spare place on a trip leaving in nine days. It is somewhere
+    you have wanted to go. Saying yes means using leave you were holding back in
+    case something went wrong later in the year.
+  options:
+    - {id: A, need: survival,  text: "Keep the leave. You held it back for a reason and the year is not over."}
+    - {id: B, need: fun,       text: "Go. Nine days' notice is exactly how the good ones happen."}
+    - {id: C, need: belonging, text: "Go, mostly because it is nine days with that particular friend."}
+    - {id: D, need: freedom,   text: "Go, and stay on a week longer by yourself once the group flies home."}
+
+- id: SU3
+  contrast: [survival, fun]
+  scenario: >
+    Your car is old but running. You can afford either a thorough service that
+    will keep it going another three years, or the thing you have had a tab open
+    for since spring.
+  options:
+    - {id: A, need: fun,       text: "Buy the thing. The car is running fine and you have wanted this since spring."}
+    - {id: B, need: survival,  text: "Service the car. It is running fine because it has been looked after."}
+    - {id: C, need: power,     text: "Do neither and put it toward the thing you have been telling people you would do."}
+    - {id: D, need: freedom,   text: "Service it — a car that might strand you is a car that decides your week for you."}

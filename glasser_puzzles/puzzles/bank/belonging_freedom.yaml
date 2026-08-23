@@ -1,0 +1,35 @@
+- id: BF1
+  contrast: [belonging, freedom]
+  scenario: >
+    Every Sunday your family expects you for lunch. It has been like this for
+    years. It is the only reliable day you have with nothing scheduled, and
+    lately Sunday is the day you most want back.
+  options:
+    - {id: A, need: freedom,   text: "Tell them you will come once or twice a month, and take the other Sundays back."}
+    - {id: B, need: belonging, text: "Keep going every week. It is the one thing that keeps everyone in the same room."}
+    - {id: C, need: fun,       text: "Keep going, but start suggesting things to do afterwards so it is not only the table."}
+    - {id: D, need: power,     text: "Keep going and take over the organising, so at least it runs the way you would run it."}
+
+- id: BF2
+  contrast: [belonging, freedom]
+  scenario: >
+    A group you are close to is planning two weeks away together, booking
+    everything as one block. You want to see them. You do not want a fortnight
+    where every day is already decided by a spreadsheet.
+  options:
+    - {id: A, need: belonging, text: "Book the whole thing with them. Two weeks with these people is the point."}
+    - {id: B, need: freedom,   text: "Join for the first week and do the second on your own terms."}
+    - {id: C, need: fun,       text: "Go along with all of it — half of what you would remember is the stuff you would not have chosen."}
+    - {id: D, need: survival,  text: "Book your own flights and accommodation alongside theirs, so you are not locked to the group."}
+
+- id: BF3
+  contrast: [belonging, freedom]
+  scenario: >
+    Someone you are close to has started calling most evenings. You like them and
+    you do not want the calls to stop. You have also noticed you have stopped
+    starting anything after seven, because the phone might go.
+  options:
+    - {id: A, need: freedom,   text: "Tell them you will not always pick up, and let that be normal between you."}
+    - {id: B, need: belonging, text: "Keep answering. Someone ringing you most evenings is not a problem most people have."}
+    - {id: C, need: power,     text: "Suggest a fixed evening slot, so the calls stop eating the whole week."}
+    - {id: D, need: fun,       text: "Start doing something during the calls, so the evening is not only the phone."}

@@ -1,0 +1,36 @@
+- id: SF1
+  contrast: [survival, freedom]
+  scenario: >
+    Your landlord offers a three-year lease at a rent you can afford, on the
+    condition that you commit now. The flat is fine. Signing means you know
+    exactly where you will be living in 2029, which is either a relief or a
+    weight depending on the day.
+  options:
+    - {id: A, need: survival,  text: "Sign. Three years of a rent you can predict is worth more than keeping your options open."}
+    - {id: B, need: freedom,   text: "Stay on the rolling contract and pay more for the ability to leave whenever you want."}
+    - {id: C, need: fun,       text: "Decline and start looking somewhere with more going on, even if it costs more."}
+    - {id: D, need: belonging, text: "Sign if the people you see most are staying nearby, and not otherwise."}
+
+- id: SF2
+  contrast: [survival, freedom]
+  scenario: >
+    You are offered a permanent role at the place you have been contracting for.
+    Same work, less money, but a pension, sick pay and a notice period. You have
+    been contracting for nine years.
+  options:
+    - {id: A, need: freedom,   text: "Stay contracting. The money is not the point; not having a notice period is."}
+    - {id: B, need: survival,  text: "Take the permanent role. Nine years without sick pay is long enough."}
+    - {id: C, need: power,     text: "Take it only if it comes with a senior title and a team."}
+    - {id: D, need: belonging, text: "Take it — being properly part of the place, rather than adjacent to it, is worth the pay cut."}
+
+- id: SF3
+  contrast: [survival, freedom]
+  scenario: >
+    A relative offers to put money into your flat deposit. It would get you into
+    a place years earlier than you could manage alone. They have not attached
+    conditions, but they are the sort of person who mentions things later.
+  options:
+    - {id: A, need: freedom,   text: "Turn it down. You would rather wait longer than have that hanging over you."}
+    - {id: B, need: survival,  text: "Accept. Being out of the rental market years earlier is worth some awkwardness."}
+    - {id: C, need: belonging, text: "Accept, and treat it as the kind of thing families do for each other."}
+    - {id: D, need: power,     text: "Accept it as a formal loan with a written schedule, so it is yours on paper."}

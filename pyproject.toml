@@ -1,0 +1,22 @@
+[project]
+name = "glasser-puzzles"
+version = "0.1.0"
+description = "Choice Theory personality puzzles with sealed, explainable predictions (V0: no LLM)"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+glasser-puzzles = "glasser_puzzles.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["glasser_puzzles*"]
+
+[tool.setuptools.package-data]
+glasser_puzzles = ["puzzles/bank/*.yaml", "predict/params.json"]

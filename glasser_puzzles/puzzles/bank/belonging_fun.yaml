@@ -1,0 +1,36 @@
+- id: BU1
+  contrast: [belonging, fun]
+  scenario: >
+    Two invitations, same evening. One is a small dinner with people you have
+    known for fifteen years, and you know exactly how it will go. The other is a
+    thing you have never done, with people you barely know, that might be
+    excellent or might be two hours you would rather have back.
+  options:
+    - {id: A, need: fun,       text: "Take the unknown one. You already know how the dinner goes."}
+    - {id: B, need: belonging, text: "Take the dinner. Knowing exactly how it will go is not a mark against it."}
+    - {id: C, need: freedom,   text: "Decline both and take the evening for yourself."}
+    - {id: D, need: power,     text: "Take the unfamiliar one — the people there are worth knowing."}
+
+- id: BU2
+  contrast: [belonging, fun]
+  scenario: >
+    You have taken up something new and you are bad at it in the way that is
+    still enjoyable. Your usual group has started making a running joke of it.
+    It is affectionate, and it is also beginning to take the edge off the thing.
+  options:
+    - {id: A, need: fun,       text: "Keep at it and stop mentioning it to them."}
+    - {id: B, need: belonging, text: "Keep mentioning it. The joke is how that group shows it is paying attention."}
+    - {id: C, need: power,     text: "Get properly good at it, and let that end the joke on its own."}
+    - {id: D, need: freedom,   text: "Say once that you would rather they dropped it, and leave it at that."}
+
+- id: BU3
+  contrast: [belonging, fun]
+  scenario: >
+    A weekend away is being planned. The group wants the same house they have
+    booked for four years running. You suggested somewhere different and it did
+    not land. Nobody minds either way except you, mildly.
+  options:
+    - {id: A, need: belonging, text: "Go with the usual house. It works, and being the one who pushes is not worth it."}
+    - {id: B, need: fun,       text: "Push once more properly, with the alternative worked out so it is easy to say yes to."}
+    - {id: C, need: freedom,   text: "Go to the usual house and take yourself off for a day in the middle."}
+    - {id: D, need: survival,  text: "Go with the usual house — you know what it costs and what you are getting."}

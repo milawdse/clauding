@@ -1,0 +1,35 @@
+- id: PF1
+  contrast: [power, freedom]
+  scenario: >
+    You are offered a step up: more scope, more say in what gets built, and a
+    standing commitment to four fixed days a week in an office forty minutes
+    away. You have worked to your own shape for three years.
+  options:
+    - {id: A, need: power,     text: "Take it. Scope like this is what the last three years were for."}
+    - {id: B, need: freedom,   text: "Turn it down. Four fixed days is a bigger change than the scope is a gain."}
+    - {id: C, need: fun,       text: "Take it if the work itself is the interesting kind, and not otherwise."}
+    - {id: D, need: belonging, text: "Take it — being in the room with people every day is worth the commute."}
+
+- id: PF2
+  contrast: [power, freedom]
+  scenario: >
+    Something you built alone is getting used more than you expected. You could
+    hand it to a team who would take it much further than you can, or keep it as
+    yours and let it grow at whatever pace you have time for.
+  options:
+    - {id: A, need: freedom,   text: "Keep it. It grows slower, but it stays the thing you decided it was."}
+    - {id: B, need: power,     text: "Hand it over. It should be as good as it can be, and you cannot get it there alone."}
+    - {id: C, need: belonging, text: "Hand it over and stay involved, so it becomes something you built with people."}
+    - {id: D, need: fun,       text: "Hand it over and go and start the next thing, which is the part you like anyway."}
+
+- id: PF3
+  contrast: [power, freedom]
+  scenario: >
+    An industry group invites you onto a committee that sets standards in your
+    field. Real influence over how things get done. It also means two years of
+    meetings, agendas, and other people's process.
+  options:
+    - {id: A, need: power,     text: "Join. If people are going to set the rules, better that you are one of them."}
+    - {id: B, need: freedom,   text: "Decline. Two years of other people's agendas is the exact thing you have arranged your life to avoid."}
+    - {id: C, need: survival,  text: "Join. Being known in the field is what keeps work coming in the lean years."}
+    - {id: D, need: belonging, text: "Join, mostly because two of the people on it are people you would like to know properly."}

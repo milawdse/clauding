@@ -1,0 +1,36 @@
+- id: FU1
+  contrast: [freedom, fun]
+  scenario: >
+    You have a free Saturday, the first in a while. A festival you would probably
+    enjoy is on, but it means a timetable, a crowd, and being somewhere specific
+    at specific times all day.
+  options:
+    - {id: A, need: fun,       text: "Go. It is one day, and days like it are the reason you wanted a free Saturday."}
+    - {id: B, need: freedom,   text: "Stay out of it. The first free Saturday in months should not have a timetable."}
+    - {id: C, need: belonging, text: "Go if the others are going, since that is the part that makes it worth the crowd."}
+    - {id: D, need: survival,  text: "Stay in. A day like that costs you the Sunday as well, and you know it."}
+
+- id: FU2
+  contrast: [freedom, fun]
+  scenario: >
+    A course you would genuinely enjoy runs for ten weeks, same evening every
+    week, and they ask you not to join unless you can commit to all ten. You have
+    been curious about the subject for years.
+  options:
+    - {id: A, need: fun,       text: "Sign up for all ten. You have been curious about this for years."}
+    - {id: B, need: freedom,   text: "Skip it. Ten fixed evenings is a bigger promise than the subject is a pull."}
+    - {id: C, need: power,     text: "Sign up — ten weeks is how you actually get good at something rather than dabbling."}
+    - {id: D, need: belonging, text: "Sign up if you can talk someone into doing it with you."}
+
+- id: FU3
+  contrast: [freedom, fun]
+  scenario: >
+    You have three weeks off. You could book a trip now — flights, rooms, the lot
+    — and know it will be good. Or you could leave it entirely open and decide
+    each morning, which might be the best three weeks you have had or might be
+    three weeks of not quite getting round to things.
+  options:
+    - {id: A, need: freedom,   text: "Leave it open. Deciding each morning is the actual holiday."}
+    - {id: B, need: fun,       text: "Book it. Booked trips are how you end up somewhere you would never have got round to."}
+    - {id: C, need: survival,  text: "Book it. Three unplanned weeks is how three weeks disappear."}
+    - {id: D, need: belonging, text: "Book it around whoever can get the same time off."}

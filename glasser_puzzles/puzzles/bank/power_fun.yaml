@@ -1,0 +1,37 @@
+- id: PU1
+  contrast: [power, fun]
+  scenario: >
+    You have two projects and time for one. The first is squarely in what you are
+    known for and would be the best thing you have done in that line. The second
+    is in an area you know almost nothing about, and you would be starting from
+    the bottom in public.
+  options:
+    - {id: A, need: power,     text: "Do the first. Doing your best work in the thing you are known for is not a small thing."}
+    - {id: B, need: fun,       text: "Do the second. Knowing nothing about it is the reason to do it."}
+    - {id: C, need: survival,  text: "Do the first. Starting from the bottom in public is expensive at this point."}
+    - {id: D, need: freedom,   text: "Do the second — nobody has expectations about you in that field yet."}
+
+- id: PU2
+  contrast: [power, fun]
+  scenario: >
+    A talk you are giving is nearly ready. It is solid and it will land. Three
+    days out, you think of a different version — riskier, more interesting, and
+    you are not sure you can get it finished properly in time.
+  options:
+    - {id: A, need: fun,       text: "Rebuild it. The interesting version is the one you would want to sit through."}
+    - {id: B, need: power,     text: "Give the solid one. A talk that lands is the point of giving a talk."}
+    - {id: C, need: survival,  text: "Give the solid one. Three days is not enough to gamble a room on."}
+    - {id: D, need: belonging, text: "Ask two people you trust which one they would rather hear, and go with that."}
+
+- id: PU3
+  contrast: [power, fun]
+  scenario: >
+    You have got quite good at something you originally took up because it was
+    enjoyable. There is now a competitive version of it, with rankings. Entering
+    would change how you spend the time; not entering means staying where you are,
+    which you like.
+  options:
+    - {id: A, need: fun,       text: "Stay where you are. You took it up because it was enjoyable and it still is."}
+    - {id: B, need: power,     text: "Enter. You are good enough that it would be strange not to find out how good."}
+    - {id: C, need: belonging, text: "Enter if the people you do it with are entering, and not otherwise."}
+    - {id: D, need: freedom,   text: "Stay out. The moment there are rankings, someone else decides what you are doing it for."}

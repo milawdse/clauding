@@ -1,0 +1,38 @@
+- id: SB1
+  contrast: [survival, belonging]
+  scenario: >
+    Your sister asks to borrow most of the savings you have been building for
+    two years. She wants to start something on her own and has asked you before
+    anyone else. She is serious about it, but her plan is still rough, and if it
+    does not work the money is gone.
+  options:
+    - {id: A, need: survival,  text: "Offer a much smaller amount — enough to help, small enough that losing it would not set you back."}
+    - {id: B, need: belonging, text: "Lend her what she asked for. She came to you first, and you would rather be the person she can come to."}
+    - {id: C, need: power,     text: "Tell her you will fund it once the two of you have worked the plan into something solid."}
+    - {id: D, need: freedom,   text: "Say you would rather not tie your money to anyone else's plans, and leave it there."}
+
+- id: SB2
+  contrast: [survival, belonging]
+  scenario: >
+    You are offered a job in another city. The pay is better and the contract is
+    long, which would settle a question that has been hanging over you for
+    years. The people you see every week are all here, and none of them are
+    moving.
+  options:
+    - {id: A, need: belonging, text: "Stay. The pay gap is real, but the people here are what you would actually be giving up."}
+    - {id: B, need: survival,  text: "Take it. A long contract is the thing you have been trying to get hold of."}
+    - {id: C, need: fun,       text: "Take it as an experiment — a year somewhere unfamiliar, and see what the place turns out to be."}
+    - {id: D, need: freedom,   text: "Turn it down and go independent instead, so that no employer decides where you live."}
+
+- id: SB3
+  contrast: [survival, belonging]
+  scenario: >
+    Something is going round at work and half your team has had it. Tonight is a
+    close friend's birthday dinner, twelve people in a small room. You said weeks
+    ago that you would be there. You have a stretch of work coming that would be
+    very hard to do while ill.
+  options:
+    - {id: A, need: survival,  text: "Send your apologies. Getting ill this month would cost you more than one dinner is worth."}
+    - {id: B, need: belonging, text: "Go. You said you would, and yours is the absence they would notice."}
+    - {id: C, need: fun,       text: "Go, and talk them into moving it somewhere with more air and fewer walls."}
+    - {id: D, need: power,     text: "Go for the first hour, make sure your toast lands, and leave before the room fills up."}
