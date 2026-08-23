@@ -48,6 +48,20 @@ python -m glasser_puzzles.cli play          # answer it yourself
 python -m glasser_puzzles.cli verify-log    # audit the sealed predictions
 ```
 
+**Or in a browser, no install:** open `web/index.html` directly (`file://`
+works, no server needed). It has the same two steps as `cli.py play` — a
+**Test** tab for the questionnaire and profile, a **Play** tab for the sealed
+puzzle predictions — as a single self-contained HTML file with no dependencies.
+It is a hand-ported copy of the same items, puzzle bank, fitted β/α, and
+reasoning templates as the Python package below (checked to match Python's
+output to 6 decimal places); the Python package remains the canonical
+implementation, and the two are not auto-synced, so a change to the scoring or
+puzzle bank needs to be ported by hand into `web/index.html` as well. A
+browser page also can't make the seal-before-reveal property cryptographically
+tamper-evident the way `verify-log` does for the CLI's hashed JSONL log — it
+preserves the *ordering* (computed before the options are clickable), not a
+provable guarantee, and the page says so.
+
 Evaluation and validation:
 
 ```bash

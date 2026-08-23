@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choice Theory Personality Puzzles — V0</title>
+<style>
+  :root {
+    --bg: #faf9f7;
+    --panel: #ffffff;
+    --border: #e4e0da;
+    --ink: #1f1c18;
+    --ink-soft: #5a544c;
+    --ink-faint: #948c80;
+    --accent: #a8532e;
+    --accent-soft: #f1e2d9;
+    --good: #3c7a4e;
+    --bad: #b8433a;
+    --bar-bg: #eee9e2;
+    --bar-fill: #c9967a;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171512;
+      --panel: #221f1b;
+      --border: #38332c;
+      --ink: #efe9e1;
+      --ink-soft: #b8ada0;
+      --ink-faint: #7c7266;
+      --accent: #e08a5f;
+      --accent-soft: #3a2a20;
+      --good: #6bbf85;
+      --bad: #e08277;
+      --bar-bg: #2c2822;
+      --bar-fill: #a76b47;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171512;
+    --panel: #221f1b;
+    --border: #38332c;
+    --ink: #efe9e1;
+    --ink-soft: #b8ada0;
+    --ink-faint: #7c7266;
+    --accent: #e08a5f;
+    --accent-soft: #3a2a20;
+    --good: #6bbf85;
+    --bad: #e08277;
+    --bar-bg: #2c2822;
+    --bar-fill: #a76b47;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  header.top { margin-bottom: 20px; }
+  header.top h1 { font-size: 1.25rem; margin: 0 0 4px; }
+  header.top p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+  nav.tabs {
+    display: flex; gap: 6px; margin: 20px 0 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  nav.tabs button {
+    font: inherit; font-size: 0.95rem; font-weight: 600;
+    background: none; border: none; cursor: pointer;
+    padding: 10px 4px; margin-right: 18px;
+    color: var(--ink-faint);
+    border-bottom: 2px solid transparent;
+  }
+  nav.tabs button.active { color: var(--ink); border-bottom-color: var(--accent); }
+  nav.tabs button:disabled { cursor: not-allowed; opacity: 0.45; }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+  }
+  .note {
+    font-size: 0.85rem; color: var(--ink-faint);
+    background: var(--accent-soft); border-radius: 8px;
+    padding: 10px 14px; margin: 0 0 18px;
+  }
+
+  .q { margin-bottom: 22px; }
+  .q .qtext { font-size: 0.98rem; margin-bottom: 10px; }
+  .q .progress { font-size: 0.78rem; color: var(--ink-faint); margin-bottom: 2px; }
+  .likert { display: flex; gap: 8px; flex-wrap: wrap; }
+  .likert label {
+    flex: 1 1 auto; min-width: 88px; text-align: center;
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 6px; cursor: pointer; font-size: 0.82rem; color: var(--ink-soft);
+  }
+  .likert input { display: none; }
+  .likert input:checked + span { color: var(--accent); font-weight: 700; }
+  .likert label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .likert label:hover { border-color: var(--ink-faint); }
+
+  textarea {
+    width: 100%; font: inherit; font-size: 0.92rem;
+    border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--ink);
+    padding: 10px; resize: vertical; min-height: 56px;
+  }
+
+  button.primary {
+    font: inherit; font-weight: 700; font-size: 0.95rem;
+    background: var(--accent); color: #fff; border: none;
+    border-radius: 8px; padding: 12px 20px; cursor: pointer;
+    margin-top: 6px;
+  }
+  button.primary:hover { filter: brightness(1.05); }
+  button.primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.ghost {
+    font: inherit; font-size: 0.85rem; color: var(--ink-soft);
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; cursor: pointer;
+  }
+
+  .bar-row { display: grid; grid-template-columns: 130px 1fr 64px; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bar-label { font-size: 0.86rem; font-weight: 600; }
+  .bar-track { position: relative; height: 16px; background: var(--bar-bg); border-radius: 999px; overflow: hidden; }
+  .bar-fill { position: absolute; top: 0; bottom: 0; left: 50%; background: var(--bar-fill); }
+  .bar-mid { position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--ink-faint); }
+  .bar-val { font-size: 0.78rem; color: var(--ink-faint); text-align: right; font-family: var(--mono); }
+  .conf { font-size: 0.72rem; color: var(--ink-faint); margin-top: -6px; margin-bottom: 12px; margin-left: 130px; }
+
+  .heuristics { margin-top: 18px; }
+  .heuristics li { margin-bottom: 8px; font-size: 0.92rem; }
+
+  .scenario { font-size: 1.02rem; margin-bottom: 18px; }
+  .option {
+    display: block; width: 100%; text-align: left;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg); color: var(--ink);
+    padding: 12px 14px; margin-bottom: 10px; cursor: pointer;
+    font: inherit; font-size: 0.92rem;
+  }
+  .option:hover:not(:disabled) { border-color: var(--accent); }
+  .option:disabled { cursor: default; }
+  .option .oid { font-weight: 700; margin-right: 6px; color: var(--accent); }
+  .option.hit { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--bg)); }
+  .option.miss-pred { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--bg)); }
+  .option.chosen-wrong { outline: 2px dashed var(--ink-faint); outline-offset: 2px; }
+
+  .reveal { border-top: 1px dashed var(--border); margin-top: 16px; padding-top: 14px; }
+  .reveal .verdict { font-weight: 700; margin-bottom: 8px; }
+  .reveal .verdict.hit { color: var(--good); }
+  .reveal .verdict.miss { color: var(--bad); }
+  .reveal ol { padding-left: 20px; margin: 0 0 6px; }
+  .reveal li { margin-bottom: 6px; font-size: 0.9rem; color: var(--ink-soft); }
+
+  .running { font-size: 0.85rem; color: var(--ink-faint); margin-top: 14px; }
+
+  .summary-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 12px; }
+  .summary-table td { padding: 5px 8px; border-bottom: 1px solid var(--border); }
+  .summary-table td:first-child { color: var(--ink-soft); }
+  .summary-table td:not(:first-child) { text-align: right; font-family: var(--mono); }
+
+  .locked { text-align: center; color: var(--ink-faint); padding: 30px 0; }
+  .footer-note { font-size: 0.78rem; color: var(--ink-faint); margin-top: 24px; text-align: center; }
+  code { font-family: var(--mono); background: var(--bar-bg); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Choice Theory Personality Puzzles</h1>
+    <p>V0 — no language model. A logistic need-contest model predicts your choice before you make it, then shows the arithmetic.</p>
+  </header>
+
+  <nav class="tabs">
+    <button id="tab-test" class="active" onclick="showTab('test')">1. Test</button>
+    <button id="tab-play" onclick="showTab('play')" disabled>2. Play (inference)</button>
+  </nav>
+
+  <div id="view-test"></div>
+  <div id="view-play" style="display:none"></div>
+
+  <p class="footer-note">
+    Client-side port of the Python V0 pipeline (<code>glasser_puzzles/</code>) — same items, same puzzle bank, same fitted β/α, same reasoning templates. Not a validated psychometric instrument; a self-reflection and research prototype only.
+  </p>
+</div>
+
+<script>
+/* =========================================================================
+   Data — ported verbatim from the Python package (needs/items.py,
+   puzzles/bank/*.yaml, predict/params.json, profile/heuristics.py).
+   ========================================================================= */
+const DATA = {"items":[{"id":"S1","text":"I keep a financial cushion so an unexpected bill would not disrupt my life.","need":"survival","reverse":false},{"id":"S2","text":"Before committing to something new, I want to know exactly what could go wrong.","need":"survival","reverse":false},{"id":"S3","text":"I am comfortable leaving my future arrangements loose and unplanned.","need":"survival","reverse":true},{"id":"S4","text":"I would rather gamble on something uncertain than settle for something dependable.","need":"survival","reverse":true},{"id":"B1","text":"A day feels incomplete if I have not had a real conversation with someone I care about.","need":"belonging","reverse":false},{"id":"B2","text":"I will change my own plans to keep someone close to me from feeling let down.","need":"belonging","reverse":false},{"id":"B3","text":"I am content spending long stretches of time without contacting anyone.","need":"belonging","reverse":true},{"id":"B4","text":"I make the decisions that matter to me without needing to talk them through with anyone.","need":"belonging","reverse":true},{"id":"P1","text":"I want the work I do to be visibly better than what was expected of me.","need":"power","reverse":false},{"id":"P2","text":"Being recognised as good at something matters to me more than I usually admit.","need":"power","reverse":false},{"id":"P3","text":"I am content to contribute without anyone knowing which part was mine.","need":"power","reverse":true},{"id":"P4","text":"I have no particular wish to be the best at the things I do.","need":"power","reverse":true},{"id":"F1","text":"Being told exactly how to do something makes me want to do it my own way instead.","need":"freedom","reverse":false},{"id":"F2","text":"I would accept a smaller reward if it meant nobody could tell me how to spend my time.","need":"freedom","reverse":false},{"id":"F3","text":"I would rather someone else set the rules so that I do not have to decide.","need":"freedom","reverse":true},{"id":"F4","text":"Committing myself to a long arrangement does not feel like giving anything up.","need":"freedom","reverse":true},{"id":"U1","text":"I go out of my way to learn things that have no practical use to me.","need":"fun","reverse":false},{"id":"U2","text":"I lose track of time when something turns out to be more interesting than I expected.","need":"fun","reverse":false},{"id":"U3","text":"I prefer activities whose outcome I can already predict.","need":"fun","reverse":true},{"id":"U4","text":"I would rather repeat something I know I enjoy than take a chance on something new.","need":"fun","reverse":true},{"id":"C1","text":"When someone close to me behaves badly, I focus on what I can change in how I respond.","need":null,"reverse":false},{"id":"C2","text":"If people would just take my advice, most of my frustrations would disappear.","need":null,"reverse":true},{"id":"C3","text":"When something goes wrong between me and someone else, it is usually because they would not listen.","need":null,"reverse":true}],"puzzles":[{"id":"BF1","contrast":["belonging","freedom"],"scenario":"Every Sunday your family expects you for lunch. It has been like this for years. It is the only reliable day you have with nothing scheduled, and lately Sunday is the day you most want back.","options":[{"id":"A","need":"freedom","text":"Tell them you will come once or twice a month, and take the other Sundays back."},{"id":"B","need":"belonging","text":"Keep going every week. It is the one thing that keeps everyone in the same room."},{"id":"C","need":"fun","text":"Keep going, but start suggesting things to do afterwards so it is not only the table."},{"id":"D","need":"power","text":"Keep going and take over the organising, so at least it runs the way you would run it."}]},{"id":"BF2","contrast":["belonging","freedom"],"scenario":"A group you are close to is planning two weeks away together, booking everything as one block. You want to see them. You do not want a fortnight where every day is already decided by a spreadsheet.","options":[{"id":"A","need":"belonging","text":"Book the whole thing with them. Two weeks with these people is the point."},{"id":"B","need":"freedom","text":"Join for the first week and do the second on your own terms."},{"id":"C","need":"fun","text":"Go along with all of it \u2014 half of what you would remember is the stuff you would not have chosen."},{"id":"D","need":"survival","text":"Book your own flights and accommodation alongside theirs, so you are not locked to the group."}]},{"id":"BF3","contrast":["belonging","freedom"],"scenario":"Someone you are close to has started calling most evenings. You like them and you do not want the calls to stop. You have also noticed you have stopped starting anything after seven, because the phone might go.","options":[{"id":"A","need":"freedom","text":"Tell them you will not always pick up, and let that be normal between you."},{"id":"B","need":"belonging","text":"Keep answering. Someone ringing you most evenings is not a problem most people have."},{"id":"C","need":"power","text":"Suggest a fixed evening slot, so the calls stop eating the whole week."},{"id":"D","need":"fun","text":"Start doing something during the calls, so the evening is not only the phone."}]},{"id":"BU1","contrast":["belonging","fun"],"scenario":"Two invitations, same evening. One is a small dinner with people you have known for fifteen years, and you know exactly how it will go. The other is a thing you have never done, with people you barely know, that might be excellent or might be two hours you would rather have back.","options":[{"id":"A","need":"fun","text":"Take the unknown one. You already know how the dinner goes."},{"id":"B","need":"belonging","text":"Take the dinner. Knowing exactly how it will go is not a mark against it."},{"id":"C","need":"freedom","text":"Decline both and take the evening for yourself."},{"id":"D","need":"power","text":"Take the unfamiliar one \u2014 the people there are worth knowing."}]},{"id":"BU2","contrast":["belonging","fun"],"scenario":"You have taken up something new and you are bad at it in the way that is still enjoyable. Your usual group has started making a running joke of it. It is affectionate, and it is also beginning to take the edge off the thing.","options":[{"id":"A","need":"fun","text":"Keep at it and stop mentioning it to them."},{"id":"B","need":"belonging","text":"Keep mentioning it. The joke is how that group shows it is paying attention."},{"id":"C","need":"power","text":"Get properly good at it, and let that end the joke on its own."},{"id":"D","need":"freedom","text":"Say once that you would rather they dropped it, and leave it at that."}]},{"id":"BU3","contrast":["belonging","fun"],"scenario":"A weekend away is being planned. The group wants the same house they have booked for four years running. You suggested somewhere different and it did not land. Nobody minds either way except you, mildly.","options":[{"id":"A","need":"belonging","text":"Go with the usual house. It works, and being the one who pushes is not worth it."},{"id":"B","need":"fun","text":"Push once more properly, with the alternative worked out so it is easy to say yes to."},{"id":"C","need":"freedom","text":"Go to the usual house and take yourself off for a day in the middle."},{"id":"D","need":"survival","text":"Go with the usual house \u2014 you know what it costs and what you are getting."}]},{"id":"BP1","contrast":["belonging","power"],"scenario":"A piece of work you largely did is being presented next week. Your colleague, who did the smaller half, has been asked to present it and is visibly pleased. Correcting the record is possible but would take something away from them.","options":[{"id":"A","need":"power","text":"Make sure the room knows which parts were yours. The work was yours and that should be on the record."},{"id":"B","need":"belonging","text":"Leave it. They are pleased, you work with them every day, and that is worth more than the credit."},{"id":"C","need":"freedom","text":"Say nothing and quietly stop putting your best work into things you do not control."},{"id":"D","need":"fun","text":"Let it go and put your energy into the next thing, which is more interesting anyway."}]},{"id":"BP2","contrast":["belonging","power"],"scenario":"You are up for something you want. So is a close friend, and only one of you can have it. They do not know you applied. You could mention it now, or wait and let the decision arrive on its own.","options":[{"id":"A","need":"belonging","text":"Tell them today, before they hear it from anyone else."},{"id":"B","need":"power","text":"Say nothing and compete properly. You both applied; that is what applying means."},{"id":"C","need":"freedom","text":"Withdraw. You would rather not have the thing than have it on these terms."},{"id":"D","need":"fun","text":"Tell them, and treat the whole thing as something to laugh about whichever way it lands."}]},{"id":"BP3","contrast":["belonging","power"],"scenario":"Your team is stuck. You can see the answer and you are fairly sure you are right. Saying so plainly would end the discussion an hour early and would also make two people look like they had been going the wrong way.","options":[{"id":"A","need":"power","text":"Say it plainly. Being right an hour earlier is worth more than an hour of everyone's comfort."},{"id":"B","need":"belonging","text":"Ask questions that get them there themselves, even if it takes the whole hour."},{"id":"C","need":"survival","text":"Put it in writing afterwards, so it is on record without a confrontation in the room."},{"id":"D","need":"freedom","text":"Say your piece once, then let the room do whatever it decides to do."}]},{"id":"FU1","contrast":["freedom","fun"],"scenario":"You have a free Saturday, the first in a while. A festival you would probably enjoy is on, but it means a timetable, a crowd, and being somewhere specific at specific times all day.","options":[{"id":"A","need":"fun","text":"Go. It is one day, and days like it are the reason you wanted a free Saturday."},{"id":"B","need":"freedom","text":"Stay out of it. The first free Saturday in months should not have a timetable."},{"id":"C","need":"belonging","text":"Go if the others are going, since that is the part that makes it worth the crowd."},{"id":"D","need":"survival","text":"Stay in. A day like that costs you the Sunday as well, and you know it."}]},{"id":"FU2","contrast":["freedom","fun"],"scenario":"A course you would genuinely enjoy runs for ten weeks, same evening every week, and they ask you not to join unless you can commit to all ten. You have been curious about the subject for years.","options":[{"id":"A","need":"fun","text":"Sign up for all ten. You have been curious about this for years."},{"id":"B","need":"freedom","text":"Skip it. Ten fixed evenings is a bigger promise than the subject is a pull."},{"id":"C","need":"power","text":"Sign up \u2014 ten weeks is how you actually get good at something rather than dabbling."},{"id":"D","need":"belonging","text":"Sign up if you can talk someone into doing it with you."}]},{"id":"FU3","contrast":["freedom","fun"],"scenario":"You have three weeks off. You could book a trip now \u2014 flights, rooms, the lot \u2014 and know it will be good. Or you could leave it entirely open and decide each morning, which might be the best three weeks you have had or might be three weeks of not quite getting round to things.","options":[{"id":"A","need":"freedom","text":"Leave it open. Deciding each morning is the actual holiday."},{"id":"B","need":"fun","text":"Book it. Booked trips are how you end up somewhere you would never have got round to."},{"id":"C","need":"survival","text":"Book it. Three unplanned weeks is how three weeks disappear."},{"id":"D","need":"belonging","text":"Book it around whoever can get the same time off."}]},{"id":"PF1","contrast":["power","freedom"],"scenario":"You are offered a step up: more scope, more say in what gets built, and a standing commitment to four fixed days a week in an office forty minutes away. You have worked to your own shape for three years.","options":[{"id":"A","need":"power","text":"Take it. Scope like this is what the last three years were for."},{"id":"B","need":"freedom","text":"Turn it down. Four fixed days is a bigger change than the scope is a gain."},{"id":"C","need":"fun","text":"Take it if the work itself is the interesting kind, and not otherwise."},{"id":"D","need":"belonging","text":"Take it \u2014 being in the room with people every day is worth the commute."}]},{"id":"PF2","contrast":["power","freedom"],"scenario":"Something you built alone is getting used more than you expected. You could hand it to a team who would take it much further than you can, or keep it as yours and let it grow at whatever pace you have time for.","options":[{"id":"A","need":"freedom","text":"Keep it. It grows slower, but it stays the thing you decided it was."},{"id":"B","need":"power","text":"Hand it over. It should be as good as it can be, and you cannot get it there alone."},{"id":"C","need":"belonging","text":"Hand it over and stay involved, so it becomes something you built with people."},{"id":"D","need":"fun","text":"Hand it over and go and start the next thing, which is the part you like anyway."}]},{"id":"PF3","contrast":["power","freedom"],"scenario":"An industry group invites you onto a committee that sets standards in your field. Real influence over how things get done. It also means two years of meetings, agendas, and other people's process.","options":[{"id":"A","need":"power","text":"Join. If people are going to set the rules, better that you are one of them."},{"id":"B","need":"freedom","text":"Decline. Two years of other people's agendas is the exact thing you have arranged your life to avoid."},{"id":"C","need":"survival","text":"Join. Being known in the field is what keeps work coming in the lean years."},{"id":"D","need":"belonging","text":"Join, mostly because two of the people on it are people you would like to know properly."}]},{"id":"PU1","contrast":["power","fun"],"scenario":"You have two projects and time for one. The first is squarely in what you are known for and would be the best thing you have done in that line. The second is in an area you know almost nothing about, and you would be starting from the bottom in public.","options":[{"id":"A","need":"power","text":"Do the first. Doing your best work in the thing you are known for is not a small thing."},{"id":"B","need":"fun","text":"Do the second. Knowing nothing about it is the reason to do it."},{"id":"C","need":"survival","text":"Do the first. Starting from the bottom in public is expensive at this point."},{"id":"D","need":"freedom","text":"Do the second \u2014 nobody has expectations about you in that field yet."}]},{"id":"PU2","contrast":["power","fun"],"scenario":"A talk you are giving is nearly ready. It is solid and it will land. Three days out, you think of a different version \u2014 riskier, more interesting, and you are not sure you can get it finished properly in time.","options":[{"id":"A","need":"fun","text":"Rebuild it. The interesting version is the one you would want to sit through."},{"id":"B","need":"power","text":"Give the solid one. A talk that lands is the point of giving a talk."},{"id":"C","need":"survival","text":"Give the solid one. Three days is not enough to gamble a room on."},{"id":"D","need":"belonging","text":"Ask two people you trust which one they would rather hear, and go with that."}]},{"id":"PU3","contrast":["power","fun"],"scenario":"You have got quite good at something you originally took up because it was enjoyable. There is now a competitive version of it, with rankings. Entering would change how you spend the time; not entering means staying where you are, which you like.","options":[{"id":"A","need":"fun","text":"Stay where you are. You took it up because it was enjoyable and it still is."},{"id":"B","need":"power","text":"Enter. You are good enough that it would be strange not to find out how good."},{"id":"C","need":"belonging","text":"Enter if the people you do it with are entering, and not otherwise."},{"id":"D","need":"freedom","text":"Stay out. The moment there are rankings, someone else decides what you are doing it for."}]},{"id":"SB1","contrast":["survival","belonging"],"scenario":"Your sister asks to borrow most of the savings you have been building for two years. She wants to start something on her own and has asked you before anyone else. She is serious about it, but her plan is still rough, and if it does not work the money is gone.","options":[{"id":"A","need":"survival","text":"Offer a much smaller amount \u2014 enough to help, small enough that losing it would not set you back."},{"id":"B","need":"belonging","text":"Lend her what she asked for. She came to you first, and you would rather be the person she can come to."},{"id":"C","need":"power","text":"Tell her you will fund it once the two of you have worked the plan into something solid."},{"id":"D","need":"freedom","text":"Say you would rather not tie your money to anyone else's plans, and leave it there."}]},{"id":"SB2","contrast":["survival","belonging"],"scenario":"You are offered a job in another city. The pay is better and the contract is long, which would settle a question that has been hanging over you for years. The people you see every week are all here, and none of them are moving.","options":[{"id":"A","need":"belonging","text":"Stay. The pay gap is real, but the people here are what you would actually be giving up."},{"id":"B","need":"survival","text":"Take it. A long contract is the thing you have been trying to get hold of."},{"id":"C","need":"fun","text":"Take it as an experiment \u2014 a year somewhere unfamiliar, and see what the place turns out to be."},{"id":"D","need":"freedom","text":"Turn it down and go independent instead, so that no employer decides where you live."}]},{"id":"SB3","contrast":["survival","belonging"],"scenario":"Something is going round at work and half your team has had it. Tonight is a close friend's birthday dinner, twelve people in a small room. You said weeks ago that you would be there. You have a stretch of work coming that would be very hard to do while ill.","options":[{"id":"A","need":"survival","text":"Send your apologies. Getting ill this month would cost you more than one dinner is worth."},{"id":"B","need":"belonging","text":"Go. You said you would, and yours is the absence they would notice."},{"id":"C","need":"fun","text":"Go, and talk them into moving it somewhere with more air and fewer walls."},{"id":"D","need":"power","text":"Go for the first hour, make sure your toast lands, and leave before the room fills up."}]},{"id":"SF1","contrast":["survival","freedom"],"scenario":"Your landlord offers a three-year lease at a rent you can afford, on the condition that you commit now. The flat is fine. Signing means you know exactly where you will be living in 2029, which is either a relief or a weight depending on the day.","options":[{"id":"A","need":"survival","text":"Sign. Three years of a rent you can predict is worth more than keeping your options open."},{"id":"B","need":"freedom","text":"Stay on the rolling contract and pay more for the ability to leave whenever you want."},{"id":"C","need":"fun","text":"Decline and start looking somewhere with more going on, even if it costs more."},{"id":"D","need":"belonging","text":"Sign if the people you see most are staying nearby, and not otherwise."}]},{"id":"SF2","contrast":["survival","freedom"],"scenario":"You are offered a permanent role at the place you have been contracting for. Same work, less money, but a pension, sick pay and a notice period. You have been contracting for nine years.","options":[{"id":"A","need":"freedom","text":"Stay contracting. The money is not the point; not having a notice period is."},{"id":"B","need":"survival","text":"Take the permanent role. Nine years without sick pay is long enough."},{"id":"C","need":"power","text":"Take it only if it comes with a senior title and a team."},{"id":"D","need":"belonging","text":"Take it \u2014 being properly part of the place, rather than adjacent to it, is worth the pay cut."}]},{"id":"SF3","contrast":["survival","freedom"],"scenario":"A relative offers to put money into your flat deposit. It would get you into a place years earlier than you could manage alone. They have not attached conditions, but they are the sort of person who mentions things later.","options":[{"id":"A","need":"freedom","text":"Turn it down. You would rather wait longer than have that hanging over you."},{"id":"B","need":"survival","text":"Accept. Being out of the rental market years earlier is worth some awkwardness."},{"id":"C","need":"belonging","text":"Accept, and treat it as the kind of thing families do for each other."},{"id":"D","need":"power","text":"Accept it as a formal loan with a written schedule, so it is yours on paper."}]},{"id":"SU1","contrast":["survival","fun"],"scenario":"You have four days off and enough money for one of two things: a course in something you have been curious about for years but will never earn from, or topping up the account you dip into when something breaks.","options":[{"id":"A","need":"fun","text":"Do the course. You have been circling this for years and four free days rarely line up."},{"id":"B","need":"survival","text":"Top up the account. The last time something broke you felt it for months."},{"id":"C","need":"belonging","text":"Spend the four days with people you have not properly seen in a while."},{"id":"D","need":"power","text":"Spend it on the certification that would actually move you up at work."}]},{"id":"SU2","contrast":["survival","fun"],"scenario":"A friend has a spare place on a trip leaving in nine days. It is somewhere you have wanted to go. Saying yes means using leave you were holding back in case something went wrong later in the year.","options":[{"id":"A","need":"survival","text":"Keep the leave. You held it back for a reason and the year is not over."},{"id":"B","need":"fun","text":"Go. Nine days' notice is exactly how the good ones happen."},{"id":"C","need":"belonging","text":"Go, mostly because it is nine days with that particular friend."},{"id":"D","need":"freedom","text":"Go, and stay on a week longer by yourself once the group flies home."}]},{"id":"SU3","contrast":["survival","fun"],"scenario":"Your car is old but running. You can afford either a thorough service that will keep it going another three years, or the thing you have had a tab open for since spring.","options":[{"id":"A","need":"fun","text":"Buy the thing. The car is running fine and you have wanted this since spring."},{"id":"B","need":"survival","text":"Service the car. It is running fine because it has been looked after."},{"id":"C","need":"power","text":"Do neither and put it toward the thing you have been telling people you would do."},{"id":"D","need":"freedom","text":"Service it \u2014 a car that might strand you is a car that decides your week for you."}]},{"id":"SP1","contrast":["survival","power"],"scenario":"Your manager offers you the lead on a project with real visibility. It is the kind of thing people get promoted off. It is also badly resourced, on a timetable you think is wrong, and if it fails it will fail publicly with your name on it.","options":[{"id":"A","need":"power","text":"Take it. Work this visible does not come round often, and you would rather be the one holding it."},{"id":"B","need":"survival","text":"Decline politely. A public failure would cost you more than a quiet year would."},{"id":"C","need":"freedom","text":"Take it only if you get to set the timetable and pick the people yourself."},{"id":"D","need":"belonging","text":"Ask to lead it jointly with someone you trust, so neither of you carries it alone."}]},{"id":"SP2","contrast":["survival","power"],"scenario":"You have been quietly good at your job for six years. A competitor offers you a title you have wanted for a long time, at a company that has had two rounds of layoffs and might not exist in three years.","options":[{"id":"A","need":"survival","text":"Stay where you are. A title on a company that folds is not worth much."},{"id":"B","need":"power","text":"Take it. Six quiet years is long enough, and the title is the thing you have been waiting for."},{"id":"C","need":"fun","text":"Take it because the work itself sounds more interesting than what you do now."},{"id":"D","need":"freedom","text":"Use the offer to go consulting, where nobody hands out the titles anyway."}]},{"id":"SP3","contrast":["survival","power"],"scenario":"A contract you rely on comes up for renewal. The client hints they will renew at a lower rate. You know your work is worth more than they are offering, and you also know they are your steadiest income.","options":[{"id":"A","need":"power","text":"Hold your rate and let them decide. Accepting less would say something you do not want said."},{"id":"B","need":"survival","text":"Accept the lower rate. Steady work is worth more than being right about your price."},{"id":"C","need":"belonging","text":"Talk to them properly first \u2014 you have worked together a long time and that ought to count."},{"id":"D","need":"freedom","text":"Let it go and use the gap to take on work you actually chose."}]}],"params":{"beta":2.335598377592894,"alpha":{"survival":0.0,"belonging":0.1734449967959889,"power":-0.1756099320435233,"freedom":0.10062638444847634,"fun":0.0002757524359122867}},"contrastHeuristics":{"survival|belonging":"secures their own footing before extending help to others","belonging|survival":"absorbs a personal cost rather than let someone down","survival|power":"takes the steady option over the visible one","power|survival":"accepts real exposure for work that carries their name","survival|freedom":"trades room to manoeuvre for knowing where they stand","freedom|survival":"pays a premium, in money or security, to keep their options open","survival|fun":"settles the ground before spending anything on curiosity","fun|survival":"will spend a reserve on something interesting rather than sit on it","belonging|power":"lets credit go rather than put a working relationship under strain","power|belonging":"wants their specific contribution identified, even at a social cost","belonging|freedom":"keeps standing commitments to people even when they chafe","freedom|belonging":"protects their own time even when it disappoints someone close","belonging|fun":"chooses familiar company over the novel experience","fun|belonging":"follows something interesting away from the people they know","power|freedom":"accepts someone else's process when it buys real influence","freedom|power":"turns down scope that arrives with somebody else's schedule attached","power|fun":"channels curiosity into things that build a visible record","fun|power":"follows what is interesting even when it means starting at the bottom","freedom|fun":"guards unstructured time against even enjoyable commitments","fun|freedom":"signs up to a fixed commitment when the subject pulls hard enough"},"controlHeuristics":[{"lo":-1.01,"hi":-0.45,"text":"expects things to improve once other people take their advice"},{"lo":-0.45,"hi":-0.15,"text":"tends to locate the problem in what the other person did"},{"lo":0.15,"hi":0.45,"text":"looks at their own part before assigning fault"},{"lo":0.45,"hi":1.01,"text":"starts from what they can change in themselves when something goes wrong"}]};
+
+const NEEDS = ["survival", "belonging", "power", "freedom", "fun"];
+const NEED_LABEL = {
+  survival: "Survival", belonging: "Love & Belonging", power: "Power",
+  freedom: "Freedom", fun: "Fun"
+};
+const LIKERT = [1, 2, 3, 4, 5];
+const LIKERT_LABEL = { 1: "Strongly disagree", 2: "Disagree", 3: "Neither", 4: "Agree", 5: "Strongly agree" };
+
+/* =========================================================================
+   needs/scoring.py port — deterministic, ipsative Likert -> need profile.
+   ========================================================================= */
+function scoreQuestionnaire(responses) {
+  const NEUTRAL = 3.0;
+  const needMeans = new Array(5).fill(0);
+  const confidence = new Array(5).fill(0);
+
+  NEEDS.forEach((need, idx) => {
+    const items = DATA.items.filter(i => i.need === need);
+    const values = items.map(item => {
+      const raw = (item.id in responses) ? responses[item.id] : NEUTRAL;
+      return item.reverse ? (1 + 5) - raw : raw;
+    });
+    const nMissing = items.filter(item => !(item.id in responses)).length;
+    const mean = values.reduce((a, b) => a + b, 0) / values.length;
+    needMeans[idx] = mean;
+
+    const avg = mean;
+    const variance = values.reduce((a, v) => a + (v - avg) ** 2, 0) / values.length;
+    const sd = Math.sqrt(variance);
+    const agreement = 1.0 - Math.min(1.0, sd / 2.0);
+    const answeredFraction = 1.0 - nMissing / items.length;
+    confidence[idx] = agreement * answeredFraction;
+  });
+
+  const grandMean = needMeans.reduce((a, b) => a + b, 0) / needMeans.length;
+  const strengths = needMeans.map(m => Math.max(-1, Math.min(1, (m - grandMean) / 2.0)));
+
+  const controlItems = DATA.items.filter(i => i.need === null);
+  const controlVals = controlItems.map(item => {
+    const raw = (item.id in responses) ? responses[item.id] : NEUTRAL;
+    return item.reverse ? (1 + 5) - raw : raw;
+  });
+  const controlMean = controlVals.reduce((a, b) => a + b, 0) / controlVals.length;
+  const controlOrientation = (controlMean - NEUTRAL) / (5 - NEUTRAL);
+
+  return { strengths, confidence, controlOrientation };
+}
+
+/* =========================================================================
+   profile/derive.py port — rule-based heuristic selection, no model.
+   ========================================================================= */
+const GAP_THRESHOLD = 0.25;
+const MAX_HEURISTICS = 3;
+
+function deriveHeuristics(profile) {
+  const gaps = [];
+  for (const key in DATA.contrastHeuristics) {
+    const [hi, lo] = key.split("|");
+    const gap = profile.strengths[NEEDS.indexOf(hi)] - profile.strengths[NEEDS.indexOf(lo)];
+    if (gap >= GAP_THRESHOLD) gaps.push([gap, DATA.contrastHeuristics[key]]);
+  }
+  gaps.sort((a, b) => b[0] - a[0]);
+  const heuristics = gaps.slice(0, MAX_HEURISTICS).map(g => g[1]);
+
+  const ctrl = DATA.controlHeuristics.find(c => profile.controlOrientation >= c.lo && profile.controlOrientation < c.hi);
+  if (ctrl) heuristics.push(ctrl.text);
+  return heuristics;
+}
+
+function dominantSecondary(strengths) {
+  const ptp = Math.max(...strengths) - Math.min(...strengths);
+  if (ptp < 1e-9) return [null, null];
+  const order = strengths.map((v, i) => i).sort((a, b) => strengths[b] - strengths[a]);
+  return [NEEDS[order[0]], NEEDS[order[1]]];
+}
+
+/* =========================================================================
+   predict/contest.py port — logistic need-contest softmax model.
+   ========================================================================= */
+const PARAMS = {
+  beta: DATA.params.beta,
+  alpha: NEEDS.map(n => DATA.params.alpha[n])
+};
+
+function puzzleNeedIndices(puzzle) {
+  return puzzle.options.map(o => NEEDS.indexOf(o.need));
+}
+
+function probabilities(strengths, puzzle, params) {
+  const idx = puzzleNeedIndices(puzzle);
+  const logits = idx.map(i => params.beta * strengths[i] + params.alpha[i]);
+  const max = Math.max(...logits);
+  const exp = logits.map(l => Math.exp(l - max));
+  const sum = exp.reduce((a, b) => a + b, 0);
+  return exp.map(e => e / sum);
+}
+
+function predict(strengths, puzzle, params) {
+  const probs = probabilities(strengths, puzzle, params);
+  const order = probs.map((p, i) => i).sort((a, b) => probs[b] - probs[a]);
+  const probMap = {};
+  puzzle.options.forEach((o, i) => probMap[o.id] = probs[i]);
+  return {
+    probabilities: probMap,
+    predictedOptionId: puzzle.options[order[0]].id,
+    runnerUpId: puzzle.options[order[1]].id,
+    confidence: probs[order[0]]
+  };
+}
+
+function contestedNeeds(puzzle, strengths) {
+  const scored = puzzle.options.map(o => [o.need, strengths[NEEDS.indexOf(o.need)]]);
+  scored.sort((a, b) => b[1] - a[1]);
+  return [scored[0][0], scored[1][0]];
+}
+
+/* =========================================================================
+   predict/templates.py port — reasoning built from the real coefficients.
+   ========================================================================= */
+function phraseScore(value) {
+  const m = Math.abs(value);
+  if (m < 0.1) return "right at your own average";
+  if (m < 0.3) return value > 0 ? "slightly above your average" : "slightly below your average";
+  if (m < 0.6) return value > 0 ? "well above your average" : "well below your average";
+  return value > 0 ? "at the top of your ordering" : "at the bottom of your ordering";
+}
+
+function explain(strengths, puzzle, prediction, params) {
+  const [high, low] = contestedNeeds(puzzle, strengths);
+  const hi = strengths[NEEDS.indexOf(high)], lo = strengths[NEEDS.indexOf(low)];
+  const steps = [];
+
+  if (Math.abs(hi - lo) < 0.05) {
+    steps.push(`Your answers put ${NEED_LABEL[high]} and ${NEED_LABEL[low]} at almost the same level (${fmtSigned(hi)} against ${fmtSigned(lo)} on your own scale), so there is not much in this one.`);
+  } else {
+    steps.push(`Your answers put ${NEED_LABEL[high]} ${phraseScore(hi)} (${fmtSigned(hi)}) and ${NEED_LABEL[low]} ${phraseScore(lo)} (${fmtSigned(lo)}), measured against your own average rather than anyone else's.`);
+  }
+
+  const hiOpt = puzzle.options.find(o => o.need === high);
+  const loOpt = puzzle.options.find(o => o.need === low);
+  steps.push(`This scenario sets those two against each other: option ${hiOpt.id} is the ${NEED_LABEL[high].toLowerCase()} answer, option ${loOpt.id} is the ${NEED_LABEL[low].toLowerCase()} one.`);
+
+  const authoredSet = new Set(puzzle.contrast);
+  if (!(authoredSet.has(high) && authoredSet.has(low) && puzzle.contrast.length === 2 && authoredSet.size === 2)) {
+    const authored = [...puzzle.contrast].map(n => NEED_LABEL[n]).sort().join(" and ");
+    steps.push(`It was written to test ${authored}, but given your ordering the real contest here is ${NEED_LABEL[high]} against ${NEED_LABEL[low]}.`);
+  }
+
+  const top = prediction.probabilities[prediction.predictedOptionId];
+  const runner = prediction.probabilities[prediction.runnerUpId];
+  steps.push(`Weighting need strength by how strongly it drove choices in the data (beta = ${params.beta.toFixed(2)}), that comes out at ${pct(top)} for ${prediction.predictedOptionId} against ${pct(runner)} for ${prediction.runnerUpId}.`);
+
+  const margin = prediction.confidence - runner;
+  if (margin < 0.12) {
+    steps.push(`So my guess is ${prediction.predictedOptionId} — but the gap is ${pct(margin)}, which is close enough that ${prediction.runnerUpId} would not surprise me.`);
+  } else {
+    steps.push(`So my guess is ${prediction.predictedOptionId}.`);
+  }
+  return steps;
+}
+
+function fmtSigned(v) { return (v >= 0 ? "+" : "") + v.toFixed(2); }
+function pct(v) { return Math.round(v * 100) + "%"; }
+
+/* =========================================================================
+   update/belief.py port — Laplace-approximate belief update.
+   ========================================================================= */
+function logLikelihood(s, puzzle, chosenId, params) {
+  const idx = puzzleNeedIndices(puzzle);
+  const logits = idx.map(i => params.beta * s[i] + params.alpha[i]);
+  const max = Math.max(...logits);
+  const shifted = logits.map(l => l - max);
+  const chosen = puzzle.options.findIndex(o => o.id === chosenId);
+  const logSumExp = Math.log(shifted.reduce((a, l) => a + Math.exp(l), 0));
+  return shifted[chosen] - logSumExp;
+}
+
+function gradientAscentUpdate(mean, variance, puzzle, chosenId, params, steps = 200, lr = 0.08) {
+  // Small gradient-ascent MAP solve (finite-difference gradient) — five
+  // parameters, a couple hundred cheap steps is instant in a browser and
+  // avoids pulling in a numerical optimisation library for one call site.
+  let s = mean.slice();
+  const eps = 1e-4;
+  const objective = (x) => {
+    const prior = -0.5 * x.reduce((acc, v, i) => acc + (v - mean[i]) ** 2 / variance[i], 0);
+    return logLikelihood(x, puzzle, chosenId, params) + prior;
+  };
+  for (let step = 0; step < steps; step++) {
+    const grad = s.map((_, i) => {
+      const plus = s.slice(); plus[i] += eps;
+      const minus = s.slice(); minus[i] -= eps;
+      return (objective(plus) - objective(minus)) / (2 * eps);
+    });
+    s = s.map((v, i) => v + lr * grad[i]);
+  }
+  return s;
+}
+
+function updateBelief(belief, puzzle, chosenId, params) {
+  const newMean = gradientAscentUpdate(belief.mean, belief.variance, puzzle, chosenId, params);
+  const idx = puzzleNeedIndices(puzzle);
+  const logits = idx.map(i => params.beta * newMean[i] + params.alpha[i]);
+  const max = Math.max(...logits);
+  const exp = logits.map(l => Math.exp(l - max));
+  const sum = exp.reduce((a, b) => a + b, 0);
+  const probs = exp.map(e => e / sum);
+
+  const perNeed = new Array(5).fill(0);
+  idx.forEach((i, k) => perNeed[i] += probs[k]);
+  const curvature = perNeed.map(p => params.beta ** 2 * p * (1 - p));
+  const newVariance = belief.variance.map((v, i) => 1.0 / (1.0 / v + curvature[i]));
+  return { mean: newMean, variance: newVariance };
+}
+
+function beliefFromProfile(strengths, confidence) {
+  const BASE_VAR = 0.15, MIN_CONF = 0.15;
+  const variance = confidence.map(c => BASE_VAR / Math.max(c, MIN_CONF));
+  return { mean: strengths.slice(), variance };
+}
+
+/* =========================================================================
+   puzzles/select.py port — active-learning-ish next-puzzle choice.
+   ========================================================================= */
+function entropy(probs) {
+  return -probs.reduce((a, p) => a + Math.max(p, 1e-12) * Math.log(Math.max(p, 1e-12)), 0);
+}
+
+function nextPuzzle(belief, seenIds, params) {
+  const remaining = DATA.puzzles.filter(p => !seenIds.has(p.id));
+  if (!remaining.length) return null;
+
+  const seenContrasts = {};
+  DATA.puzzles.forEach(p => {
+    if (seenIds.has(p.id)) {
+      const key = p.contrast.slice().sort().join("|");
+      seenContrasts[key] = (seenContrasts[key] || 0) + 1;
+    }
+  });
+
+  let best = null, bestScore = -Infinity;
+  for (const puzzle of remaining) {
+    const probs = probabilities(belief.mean, puzzle, params);
+    const uncertainty = puzzle.contrast.reduce((a, n) => a + belief.variance[NEEDS.indexOf(n)], 0);
+    const key = puzzle.contrast.slice().sort().join("|");
+    const repetition = 1.0 + (seenContrasts[key] || 0);
+    const score = entropy(probs) * uncertainty / repetition;
+    if (score > bestScore) { bestScore = score; best = puzzle; }
+  }
+  return best;
+}
+
+/* =========================================================================
+   App state and rendering
+   ========================================================================= */
+let session = null; // { strengths, confidence, controlOrientation, belief, seen:Set, hits, played }
+
+function showTab(name) {
+  document.getElementById("view-test").style.display = name === "test" ? "" : "none";
+  document.getElementById("view-play").style.display = name === "play" ? "" : "none";
+  document.getElementById("tab-test").classList.toggle("active", name === "test");
+  document.getElementById("tab-play").classList.toggle("active", name === "play");
+}
+
+function renderTest() {
+  const el = document.getElementById("view-test");
+  const rows = DATA.items.map((item, n) => `
+    <div class="q" data-item="${item.id}">
+      <div class="progress">${n + 1} / ${DATA.items.length}</div>
+      <div class="qtext">${escapeHtml(item.text)}</div>
+      <div class="likert">
+        ${LIKERT.map(v => `
+          <label>
+            <input type="radio" name="q_${item.id}" value="${v}">
+            <span>${v} — ${LIKERT_LABEL[v]}</span>
+          </label>`).join("")}
+      </div>
+    </div>`).join("");
+
+  const freeText = DATA.items.length ? `
+    <div class="q">
+      <div class="qtext">Describe a moment from the past year you would choose to live again.</div>
+      <textarea id="ft1" placeholder="optional"></textarea>
+    </div>
+    <div class="q">
+      <div class="qtext">Describe a situation in which you felt most like yourself.</div>
+      <textarea id="ft2" placeholder="optional"></textarea>
+    </div>` : "";
+
+  el.innerHTML = `
+    <div class="panel">
+      <p class="note">Answer every item on a 1–5 scale. Scoring is deterministic and ipsative: it measures your needs relative to your own average, not against other people — so answering everything the same way produces a flat profile, on purpose.</p>
+      ${rows}
+      ${freeText}
+      <button class="primary" id="submitBtn" onclick="submitQuestionnaire()" disabled>See my profile</button>
+      <div id="testError" style="color:var(--bad);font-size:0.85rem;margin-top:8px;"></div>
+    </div>
+    <div id="profileCard"></div>
+  `;
+  el.querySelectorAll('input[type="radio"]').forEach(inp => inp.addEventListener("change", checkComplete));
+}
+
+function checkComplete() {
+  const total = DATA.items.length;
+  const answered = DATA.items.filter(item => document.querySelector(`input[name="q_${item.id}"]:checked`)).length;
+  document.getElementById("submitBtn").disabled = answered < total;
+}
+
+function submitQuestionnaire() {
+  const responses = {};
+  for (const item of DATA.items) {
+    const checked = document.querySelector(`input[name="q_${item.id}"]:checked`);
+    if (!checked) { document.getElementById("testError").textContent = "Please answer every item."; return; }
+    responses[item.id] = parseInt(checked.value, 10);
+  }
+  const profile = scoreQuestionnaire(responses);
+  session = {
+    strengths: profile.strengths,
+    confidence: profile.confidence,
+    controlOrientation: profile.controlOrientation,
+    belief: beliefFromProfile(profile.strengths, profile.confidence),
+    seen: new Set(),
+    hits: 0,
+    played: 0,
+    lastPuzzle: null,
+    lastPrediction: null,
+    lastSteps: null,
+    answered: false
+  };
+  renderProfileCard(profile.strengths, profile.confidence, profile.controlOrientation);
+  document.getElementById("tab-play").disabled = false;
+}
+
+function renderProfileCard(strengths, confidence, controlOrientation) {
+  const [dominant, secondary] = dominantSecondary(strengths);
+  const order = NEEDS.map((n, i) => i).sort((a, b) => strengths[b] - strengths[a]);
+  const bars = order.map(i => {
+    const need = NEEDS[i];
+    const v = strengths[i];
+    const pct100 = Math.min(50, Math.abs(v) * 50);
+    const fillStyle = v >= 0
+      ? `left:50%; width:${pct100}%;`
+      : `left:${50 - pct100}%; width:${pct100}%;`;
+    return `
+      <div class="bar-row">
+        <div class="bar-label">${NEED_LABEL[need]}</div>
+        <div class="bar-track"><div class="bar-mid"></div><div class="bar-fill" style="${fillStyle}"></div></div>
+        <div class="bar-val">${fmtSigned(v)}</div>
+      </div>
+      <div class="conf">confidence ${pct(confidence[i])}</div>`;
+  }).join("");
+
+  const heuristics = deriveHeuristics({ strengths, controlOrientation });
+  const heuristicsHtml = heuristics.length
+    ? `<ul class="heuristics">${heuristics.map(h => `<li>${escapeHtml(h)}</li>`).join("")}</ul>`
+    : `<p style="color:var(--ink-faint);font-size:0.9rem;">Your needs came out close together, so no single pattern stands out.</p>`;
+
+  const orientationWord = controlOrientation > 0 ? "internal control" : "external control";
+
+  document.getElementById("profileCard").innerHTML = `
+    <div class="panel">
+      <h3 style="margin-top:0;">Your profile</h3>
+      <p style="font-size:0.85rem;color:var(--ink-soft);">Relative need strength, measured against your own average — not other people's.</p>
+      ${bars}
+      <p style="font-size:0.88rem;margin-top:14px;">Control orientation: <b>${fmtSigned(controlOrientation)}</b> — leaning toward ${orientationWord}.</p>
+      ${dominant ? `<p style="font-size:0.88rem;">Dominant: <b>${NEED_LABEL[dominant]}</b> &nbsp;·&nbsp; Secondary: <b>${NEED_LABEL[secondary]}</b></p>` : ""}
+      <h4 style="margin-bottom:6px;">What that predicts about how you decide</h4>
+      ${heuristicsHtml}
+      <p class="note" style="margin-top:16px;">Head to the <b>Play</b> tab — puzzles are chosen to test the contrasts your profile is least certain about.</p>
+    </div>
+  `;
+}
+
+function renderPlay() {
+  const el = document.getElementById("view-play");
+  if (!session) {
+    el.innerHTML = `<div class="panel locked">Complete the Test tab first — puzzles are matched to your profile.</div>`;
+    return;
+  }
+  if (!session.currentPuzzle && !session.answered) {
+    const puzzle = nextPuzzle(session.belief, session.seen, PARAMS);
+    if (!puzzle) { renderSummary(); return; }
+    session.seen.add(puzzle.id);
+    session.currentPuzzle = puzzle;
+    // Predict and fix the reasoning BEFORE the puzzle is shown to the user —
+    // this ordering is the entire point of the sealed-prediction design.
+    // (See the note at the top of this file on why this can't be
+    // cryptographically enforced client-side the way the CLI's hashed log is.)
+    const workingStrengths = session.belief.mean;
+    session.lastPrediction = predict(workingStrengths, puzzle, PARAMS);
+    session.lastSteps = explain(workingStrengths, puzzle, session.lastPrediction, PARAMS);
+    session.answered = false;
+  }
+
+  const puzzle = session.currentPuzzle;
+  const prediction = session.lastPrediction;
+  const total = Math.min(DATA.puzzles.length, session.targetCount || 5);
+
+  const optionsHtml = puzzle.options.map(o => `
+    <button class="option" data-oid="${o.id}" onclick="answerPuzzle('${o.id}')" ${session.answered ? "disabled" : ""}>
+      <span class="oid">${o.id}.</span>${escapeHtml(o.text)}
+    </button>`).join("");
+
+  let revealHtml = "";
+  if (session.answered) {
+    const hit = prediction.predictedOptionId === session.lastChoice;
+    const stepsHtml = session.lastSteps.map(s => `<li>${escapeHtml(s)}</li>`).join("");
+    let missNote = "";
+    if (!hit) {
+      const actualOpt = puzzle.options.find(o => o.id === session.lastChoice);
+      missNote = `<p style="font-size:0.88rem;color:var(--ink-soft);">You went for the ${NEED_LABEL[actualOpt.need]} answer instead, which I had at ${pct(prediction.probabilities[session.lastChoice])}. That moves ${NEED_LABEL[actualOpt.need]} up in your profile.</p>`;
+    }
+    revealHtml = `
+      <div class="reveal">
+        <div class="verdict ${hit ? "hit" : "miss"}">
+          You chose ${session.lastChoice}. I had guessed ${prediction.predictedOptionId} at ${pct(prediction.confidence)} confidence — ${hit ? "hit" : "miss"}.
+        </div>
+        <ol>${stepsHtml}</ol>
+        ${missNote}
+        <button class="primary" onclick="advancePuzzle()">Next puzzle →</button>
+      </div>`;
+  }
+
+  el.innerHTML = `
+    <div class="panel">
+      <p class="note">The guess above was computed and locked in the instant this puzzle appeared — before any option could be clicked. Note: a browser page can't make that tamper-evident the way the CLI's hashed log does; this preserves the ordering, not a cryptographic guarantee.</p>
+      <div style="font-size:0.8rem;color:var(--ink-faint);margin-bottom:10px;">Puzzle ${session.played + 1} / ${total}</div>
+      <div class="scenario">${escapeHtml(puzzle.scenario)}</div>
+      ${optionsHtml}
+      ${revealHtml}
+      <div class="running">Running: ${session.hits}/${session.played} correct${session.played ? ` (chance on 4 options ≈ 25%)` : ""}.</div>
+    </div>
+  `;
+
+  if (session.answered) {
+    puzzle.options.forEach(o => {
+      const btn = el.querySelector(`.option[data-oid="${o.id}"]`);
+      if (o.id === prediction.predictedOptionId) btn.classList.add(o.id === session.lastChoice ? "hit" : "miss-pred");
+      if (o.id === session.lastChoice && o.id !== prediction.predictedOptionId) btn.classList.add("chosen-wrong");
+    });
+  }
+}
+
+function answerPuzzle(optionId) {
+  session.lastChoice = optionId;
+  session.answered = true;
+  session.played += 1;
+  if (session.lastPrediction.predictedOptionId === optionId) session.hits += 1;
+  session.belief = updateBelief(session.belief, session.currentPuzzle, optionId, PARAMS);
+  renderPlay();
+}
+
+function advancePuzzle() {
+  session.currentPuzzle = null;
+  session.answered = false;
+  renderPlay();
+}
+
+function renderSummary() {
+  const before = session.strengths;
+  const after = session.belief.mean;
+  const rows = NEEDS.map((n, i) => {
+    const b = before[i], a = after[i];
+    const arrow = Math.abs(a - b) < 0.01 ? "" : (a > b ? "↑" : "↓");
+    return `<tr><td>${NEED_LABEL[n]}</td><td>${fmtSigned(b)}</td><td>${fmtSigned(a)} ${arrow}</td></tr>`;
+  }).join("");
+
+  document.getElementById("view-play").innerHTML = `
+    <div class="panel">
+      <h3 style="margin-top:0;">Summary</h3>
+      <p>I called ${session.hits} of ${session.played} correctly (${pct(session.hits / session.played)}). Guessing at random on four options would be about 25%.</p>
+      <h4>How your profile moved as you played</h4>
+      <table class="summary-table">
+        <tr><td></td><td>before</td><td>after</td></tr>
+        ${rows}
+      </table>
+      <button class="ghost" style="margin-top:16px;" onclick="restartPlay()">Play again with a new puzzle set</button>
+    </div>
+  `;
+}
+
+function restartPlay() {
+  session.seen = new Set();
+  session.hits = 0;
+  session.played = 0;
+  session.currentPuzzle = null;
+  session.answered = false;
+  session.belief = beliefFromProfile(session.strengths, session.confidence);
+  renderPlay();
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+document.getElementById("tab-play").addEventListener("click", () => { if (session) renderPlay(); });
+renderTest();
+</script>
+</body>
+</html>
