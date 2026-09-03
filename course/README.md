@@ -84,11 +84,19 @@ Modules 1–3 stand alone. Module 4 assumes 2–3; 6 assumes 1; 7 assumes 6;
 course/
   notebooks/   the course — 01_*.ipynb … 12_*.ipynb          <- open these
   csai/        shared helpers, standard library only
-    check.py     the exercise self-test harness
-    trace.py     Trace/Step recording and trace comparison
-    logic.py     propositional logic, CNF, DPLL
-    render.py    text tables, bar charts, trees, grids
-    data.py      loaders for ../data and bridges to ../data_gen
+    check.py       the exercise self-test harness
+    trace.py       Trace/Step recording and trace comparison        (M1)
+    logic.py       propositional logic, CNF, resolution, DPLL       (M2-3)
+    fol.py         terms, unification, SLD resolution, a parser     (M4)
+    rules.py       forward chaining, indexing, provenance           (M5)
+    search.py      BFS/DFS/IDDFS/uniform cost/A*, instrumented      (M6)
+    adversarial.py minimax, alpha-beta, MCTS with UCT               (M7)
+    csp.py         backtracking, forward checking, AC-3, MRV/LCV    (M8)
+    planning.py    STRIPS, relaxed heuristics, plan validation      (M9)
+    probability.py Bayes nets, enumeration, elimination, sampling   (M10)
+    decision.py    expected utility, MDPs, VOI, compute allocation  (M11)
+    render.py      text tables, bar charts, trees, grids
+    data.py        loaders for ../data and bridges to ../data_gen
   solutions/   reference solutions, m01.py … m12.py
   src/         percent-format sources the notebooks are generated from
   tools/       build.py, verify.py, run_notebook.py

@@ -6,7 +6,11 @@ spatial-reasoning algorithm, using reasoning-gym's
 [`color_cube_rotation`](https://github.com/open-thought/reasoning-gym) task.
 
 See **[PLAN.md](PLAN.md)** for the full research plan, LoRA configs, and
-evaluation design. Training hasn't started yet — this repo currently holds
+evaluation design, and **[course/](course/)** for a twelve-module Jupyter
+course on classical deliberative reasoning — logic, SAT, search, constraints,
+planning, probabilistic inference, decision theory — and the line from each
+classical method to the LLM reasoning technique that rediscovered it. Its
+capstone runs against the datasets below. Training hasn't started yet — this repo currently holds
 only the dataset generation pipeline, which is complete and self-verified.
 
 ## The task
